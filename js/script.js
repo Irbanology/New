@@ -6,18 +6,61 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Mobile nav (only when hamburger and nav exist)
-const hamb = $('.hamburger');
-const nav = $('.nav');
-if (hamb && nav) {
-  hamb.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    hamb.classList.toggle('open');
+// Navbar: active section on scroll (section.offsetTop - 120)
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav a[href^='#']");
+
+function setActiveNav() {
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 120;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id") || "";
+    }
   });
-  document.addEventListener('click', (e) => {
-    if (nav.classList.contains('open') && !nav.contains(e.target) && !hamb.contains(e.target)) {
-      nav.classList.remove('open');
-      hamb.classList.remove('open');
+  navLinks.forEach((a) => {
+    a.classList.remove("active");
+    if (a.getAttribute("href") === "#" + current) {
+      a.classList.add("active");
+    }
+  });
+}
+window.addEventListener("scroll", setActiveNav, { passive: true });
+window.addEventListener("load", setActiveNav);
+setActiveNav();
+
+// Navbar shadow on scroll
+const appbar = document.querySelector(".appbar");
+function updateAppbarScroll() {
+  if (appbar) {
+    if (window.scrollY > 20) {
+      appbar.classList.add("scrolled");
+    } else {
+      appbar.classList.remove("scrolled");
+    }
+  }
+}
+window.addEventListener("scroll", updateAppbarScroll, { passive: true });
+updateAppbarScroll();
+
+// Mobile nav toggle + close on link click or outside click
+const hamb = $(".hamburger");
+const nav = $(".nav");
+if (hamb && nav) {
+  hamb.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    hamb.classList.toggle("open");
+  });
+  navLinks.forEach((a) => {
+    a.addEventListener("click", () => {
+      nav.classList.remove("open");
+      hamb.classList.remove("open");
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (nav.classList.contains("open") && !nav.contains(e.target) && !hamb.contains(e.target)) {
+      nav.classList.remove("open");
+      hamb.classList.remove("open");
     }
   });
 }

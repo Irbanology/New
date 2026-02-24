@@ -52,8 +52,10 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- LCP: preload hero image for faster paint -->
+  <!-- LCP: preload hero image for faster first paint -->
   <link rel="preload" href="images/Splash.png" as="image" />
+  <!-- Preload first app preview for showcase carousel -->
+  <link rel="preload" href="images/app_preveiw/Splash.png" as="image" />
 
   <!-- Structured Data: Organization -->
   <script type="application/ld+json">
@@ -177,7 +179,7 @@
     <div class="container row">
       <a href="#home" class="brand" aria-label="Go to home">
         <div class="logo">
-          <img src="images/wibeIt_black.png" alt="WibeIt Logo" width="150" height="50" />
+          <img src="images/wibeIt_black.png" alt="WibeIt – Private Messaging App logo" width="150" height="50" />
         </div>
       </a>
       <nav class="nav" aria-label="Primary">
@@ -203,7 +205,8 @@
       <div class="container hero-split">
         <div class="hero-copy">
           <p class="kicker reveal" aria-hidden="true">Encrypted • Secured • Guarded</p>
-          <h1 id="hero-heading" class="reveal d1"><span id="typing" class="accent">WibeIT - Private Messaging App You Can Trust</span></h1>
+          <h1 id="hero-heading" class="reveal d1"><span id="typing" class="accent">WibeIT - Private Messaging App You
+              Can Trust</span></h1>
           <p class="lead reveal d2">
             Simple, fast messaging built to protect what matters. Your conversations stay private only you and the
             people you talk to.
@@ -346,7 +349,8 @@
             </div>
             <h3>P2P encryption</h3>
             <p class="muted">
-              Your conversations are protected with advanced P2P encryption — among the best encryption algorithms in 2026 — so only you and your recipient can read or listen to your messages and calls.
+              Your conversations are protected with advanced P2P encryption — among the best encryption algorithms in
+              2026 — so only you and your recipient can read or listen to your messages and calls.
             </p>
           </article>
           <article class="card reveal d1">
@@ -413,31 +417,47 @@
       <div class="container">
         <h2 id="showcase-heading" class="section-title">App preview</h2>
 
-        <div class="phone-wrap">
-          <div class="phone">
-            <div class="notch"></div>
-            <div class="screen">
-              <div class="slider" aria-roledescription="carousel">
-                <div class="slides" role="group" aria-label="App UI slides">
-                  <img src="images/Splash.png" alt="WibeIt secure chat app splash screen" width="260" height="520"
-                    loading="lazy" decoding="async" />
-                  <img src="images/Log in.png" alt="WibeIt encrypted messaging app login screen" width="260"
-                    height="520" loading="lazy" decoding="async" />
-                  <img src="images/Home Screen.png" alt="WibeIt home screen with chat list" width="260" height="520"
-                    loading="lazy" decoding="async" />
-                  <img src="images/Intro_1.png" alt="WibeIt app intro and onboarding screen" width="260" height="520"
-                    loading="lazy" decoding="async" />
-                </div>
-                <button class="slide-btn prev material-symbols-outlined" aria-label="Previous slide">
-                  chevron_left
-                </button>
-                <button class="slide-btn next material-symbols-outlined" aria-label="Next slide">
-                  chevron_right
-                </button>
-                <div class="dots" aria-hidden="true"></div>
+        <div class="showcase-wrap">
+          <button type="button" class="slide-btn prev material-symbols-outlined" aria-label="Previous slide"
+            title="Previous">
+            chevron_left
+          </button>
+          <div class="showcase-preview">
+            <div class="slider" aria-roledescription="carousel">
+              <div class="slides" role="group" aria-label="App UI slides">
+                <img src="images/app_preveiw/Splash.png" alt="WibeIt app splash screen with welcome message"
+                  loading="lazy" decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/1.png" alt="WibeIt app onboarding or welcome screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/2.png" alt="WibeIt app login or sign up screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/3.png" alt="WibeIt app home screen with chat list" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/4.png" alt="WibeIt app conversation or chat screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/5.png" alt="WibeIt app secure messaging interface" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/6.png" alt="WibeIt app chat with encryption indicator" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/7.png" alt="WibeIt app contacts or new chat screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/8.png" alt="WibeIt app profile or account screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/9.png" alt="WibeIt app settings or privacy screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/10.png" alt="WibeIt app call or voice feature screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/11.png" alt="WibeIt app media or attachments in chat" loading="lazy"
+                  decoding="async" width="280" height="607" />
+                <img src="images/app_preveiw/12.png" alt="WibeIt app notifications or security screen" loading="lazy"
+                  decoding="async" width="280" height="607" />
               </div>
+              <div class="dots" aria-hidden="true"></div>
             </div>
           </div>
+          <button type="button" class="slide-btn next material-symbols-outlined" aria-label="Next slide" title="Next">
+            chevron_right
+          </button>
         </div>
       </div>
     </section>
@@ -467,7 +487,9 @@
               <span class="material-symbols-outlined chev">expand_more</span>
             </summary>
             <p>
-              Wibeit uses P2P encryption built on some of the best encryption algorithms in 2026. Messages are encrypted on your device before being sent and can only be decrypted by the recipient’s device. Even Wibeit cannot access or read your messages.
+              Wibeit uses P2P encryption built on some of the best encryption algorithms in 2026. Messages are encrypted
+              on your device before being sent and can only be decrypted by the recipient’s device. Even Wibeit cannot
+              access or read your messages.
             </p>
           </details>
           <details class="faq-card reveal d2">
@@ -541,7 +563,7 @@
       <div class="foot-brand">
         <a href="#home" class="brand" aria-label="Go to home">
           <div class="logo">
-            <img src="images/wibeIt_black.png" alt="WibeIt Logo" width="150" height="50" />
+            <img src="images/wibeIt_black.png" alt="WibeIt – Private Messaging App logo" width="150" height="50" />
           </div>
         </a>
       </div>
@@ -577,7 +599,7 @@
       </div>
       <div class="foot-bottom-right">
         <div class="foot-email">
-          <img src="images/mail.png" alt="Email" width="24" height="24" />
+          <img src="images/mail.png" alt="Email icon" width="24" height="24" />
           <a href="mailto:support@wibeit.co">support@wibeit.co</a>
         </div>
         <div class="foot-social">
