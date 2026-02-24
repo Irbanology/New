@@ -119,9 +119,57 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
+// FAQ smooth open/close (animate height instead of instant toggle)
+const faqCards = $$('.faq-card');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (faqCards.length && !prefersReducedMotion) {
+  const DURATION_MS = 350;
+  faqCards.forEach(function (details) {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector('p');
+    if (!summary || !content) return;
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+      const isOpening = !details.open;
+      if (isOpening) {
+        details.open = true;
+        const endHeight = content.scrollHeight;
+        content.style.height = '0px';
+        content.style.overflow = 'hidden';
+        content.style.transition = 'none';
+        content.offsetHeight; // reflow
+        content.style.transition = 'height ' + (DURATION_MS / 1000) + 's ease';
+        content.style.height = endHeight + 'px';
+        const onEnd = function () {
+          content.removeEventListener('transitionend', onEnd);
+          content.style.height = '';
+          content.style.overflow = '';
+          content.style.transition = '';
+        };
+        content.addEventListener('transitionend', onEnd);
+      } else {
+        const startHeight = content.scrollHeight;
+        content.style.height = startHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.style.transition = 'height ' + (DURATION_MS / 1000) + 's ease';
+        content.offsetHeight;
+        content.style.height = '0px';
+        const onEnd = function () {
+          content.removeEventListener('transitionend', onEnd);
+          details.open = false;
+          content.style.height = '';
+          content.style.overflow = '';
+          content.style.transition = '';
+        };
+        content.addEventListener('transitionend', onEnd);
+      }
+    });
+  });
+}
+
 // Typing effect for hero title (skipped when user prefers reduced motion)
 const typingEl = $('#typing');
-const phrase = 'Secure Messaging App: End to End Encrypted Chat You Can Trust';
+const phrase = 'Secure Messaging App End to End Encrypted Chat You Can Trust';
 if (typingEl) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
