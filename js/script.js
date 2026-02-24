@@ -65,40 +65,63 @@ if (hamb && nav) {
   });
 }
 
-// Scroll progress & subtle parallax for floating shapes
-const bar = document.querySelector('.progress span');
-document.addEventListener('scroll', () => {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  const p = max <= 0 ? 0 : Math.min(1, (scrollY || window.pageYOffset) / max);
-  if (bar) bar.style.transform = `scaleX(${p})`;
-  $$('.float').forEach((el, i) => {
-    el.style.transform = `translateY(${(p * 20) * (i % 2 ? 1 : -1)}px)`;
-  });
-});
+// Defer non-critical work until after first paint (helps LCP / TBT)
+function whenIdle(cb) {
+  if (typeof requestIdleCallback !== 'undefined') {
+    requestIdleCallback(cb, { timeout: 2000 });
+  } else {
+    setTimeout(cb, 1);
+  }
+}
 
-// Ripple coordinates
-$$('[data-ripple], .btn').forEach(el => {
-  el.addEventListener('pointerdown', e => {
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty('--rx', (e.clientX - rect.left) + 'px');
-    el.style.setProperty('--ry', (e.clientY - rect.top) + 'px');
-  });
-});
-
-// Scroll reveal on view
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      revealObserver.unobserve(e.target);
+// Scroll progress & subtle parallax (passive + rAF) — deferred
+whenIdle(function () {
+  const bar = document.querySelector('.progress span');
+  let scrollScheduled = false;
+  function updateScrollProgress() {
+    scrollScheduled = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max <= 0 ? 0 : Math.min(1, (scrollY || window.pageYOffset) / max);
+    if (bar) bar.style.transform = 'scaleX(' + p + ')';
+    $$('.float').forEach(function (el, i) {
+      el.style.transform = 'translateY(' + (p * 20) * (i % 2 ? 1 : -1) + 'px)';
+    });
+  }
+  document.addEventListener('scroll', function () {
+    if (!scrollScheduled) {
+      scrollScheduled = true;
+      requestAnimationFrame(updateScrollProgress);
     }
+  }, { passive: true });
+});
+
+// Ripple coordinates — deferred
+whenIdle(function () {
+  $$('[data-ripple], .btn').forEach(function (el) {
+    el.addEventListener('pointerdown', function (e) {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--rx', (e.clientX - rect.left) + 'px');
+      el.style.setProperty('--ry', (e.clientY - rect.top) + 'px');
+    });
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-$$('.reveal').forEach((el) => revealObserver.observe(el));
+});
+
+// Scroll reveal on view — deferred
+whenIdle(function () {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+  $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
+});
 
 // Typing effect for hero title (skipped when user prefers reduced motion)
 const typingEl = $('#typing');
-const phrase = 'WibeIT - Private Messaging App You Can Trust';
+const phrase = 'Secure Messaging App: End to End Encrypted Chat You Can Trust';
 if (typingEl) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
@@ -106,8 +129,8 @@ if (typingEl) {
   } else {
     let ti = 0;
     (function typeLoop() {
+      ti = ti + 1;
       typingEl.textContent = phrase.slice(0, ti);
-      ti = ti < phrase.length ? ti + 1 : phrase.length;
       if (ti < phrase.length) setTimeout(typeLoop, 60);
     })();
   }
