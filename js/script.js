@@ -46,23 +46,70 @@ updateAppbarScroll();
 // Mobile nav toggle + close on link click or outside click
 const hamb = $(".hamburger");
 const nav = $(".nav");
+const navOverlay = document.getElementById("nav-overlay");
 if (hamb && nav) {
+  function getScrollbarWidth() {
+    return window.innerWidth - document.documentElement.clientWidth;
+  }
+  function openMenu() {
+    nav.classList.add("open");
+    hamb.classList.add("open");
+    hamb.setAttribute("aria-expanded", "true");
+    nav.removeAttribute("aria-hidden");
+    if (appbar) appbar.classList.add("drawer-open");
+    if (navOverlay) {
+      navOverlay.classList.add("active");
+      navOverlay.setAttribute("aria-hidden", "false");
+    }
+    const scrollbarWidth = getScrollbarWidth();
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = scrollbarWidth + "px";
+  }
+  function closeMenu() {
+    nav.classList.remove("open");
+    hamb.classList.remove("open");
+    hamb.setAttribute("aria-expanded", "false");
+    nav.setAttribute("aria-hidden", "true");
+    if (appbar) appbar.classList.remove("drawer-open");
+    if (navOverlay) {
+      navOverlay.classList.remove("active");
+      navOverlay.setAttribute("aria-hidden", "true");
+    }
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  }
   hamb.addEventListener("click", () => {
-    nav.classList.toggle("open");
-    hamb.classList.toggle("open");
+    const isOpen = nav.classList.contains("open");
+    if (isOpen) closeMenu();
+    else openMenu();
   });
+  if (navOverlay) {
+    navOverlay.addEventListener("click", closeMenu);
+  }
   navLinks.forEach((a) => {
-    a.addEventListener("click", () => {
-      nav.classList.remove("open");
-      hamb.classList.remove("open");
-    });
+    a.addEventListener("click", closeMenu);
   });
   document.addEventListener("click", (e) => {
-    if (nav.classList.contains("open") && !nav.contains(e.target) && !hamb.contains(e.target)) {
-      nav.classList.remove("open");
-      hamb.classList.remove("open");
+    if (nav.classList.contains("open") && !nav.contains(e.target) && !hamb.contains(e.target) && e.target !== navOverlay) {
+      closeMenu();
     }
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("open")) closeMenu();
+  });
+  function setNavAriaHidden() {
+    const isMobile = window.matchMedia("(max-width: 880px)").matches;
+    if (isMobile && !nav.classList.contains("open")) {
+      nav.setAttribute("aria-hidden", "true");
+    } else {
+      nav.removeAttribute("aria-hidden");
+    }
+    if (!isMobile && nav.classList.contains("open")) {
+      closeMenu();
+    }
+  }
+  setNavAriaHidden();
+  window.addEventListener("resize", setNavAriaHidden);
 }
 
 // Defer non-critical work until after first paint (helps LCP / TBT)

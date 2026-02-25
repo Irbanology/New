@@ -1,5 +1,9 @@
+
+
 :root {
   /* Layout — industry-standard alignment */
+  /* Fixed navbar height (row + progress bar) — used for main padding, drawer, overlay */
+  --appbar-height: 63px;
   --container-max: 1200px;
   --container-padding: 24px;
   --section-padding-y: 80px;
@@ -25,6 +29,17 @@
   --accent-glow: rgba(124, 77, 255, 0.25);
 }
 @media (min-width: 1024px) {
+@media (max-width: 880px) {
+  :root {
+    --appbar-height: 59px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --appbar-height: 55px;
+  }
+}
+
   :root {
     --container-padding: 32px;
     --section-padding-y: 96px;
@@ -54,6 +69,7 @@ body.light {
 }
 html {
   height: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 100px; /* so anchor links aren't hidden under sticky header */
   /* Firefox: scrollbar colors */
@@ -62,6 +78,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
 }
@@ -151,12 +168,40 @@ body {
   background: var(--surface);
   color: var(--text);
   font-family: "Poppins", system-ui, -apple-system, sans-serif;
+  padding-top: var(--appbar-height);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 #main-content {
   flex: 1 0 auto;
+  padding-top: 57px; /* clear fixed navbar */
+  margin-top: 0;
+  position: relative;
+  z-index: 0;
+}
+@media (max-width: 880px) {
+  body {
+    background: #fff;
+    color: #1a1a1a;
+  }
+  body,
+  #main-content {
+    margin-top: 0;
+  }
+  #main-content {
+    padding-top: var(--appbar-height);
+  }
+}
+@media (max-width: 480px) {
+  body,
+  #main-content {
+    margin-top: 0;
+    
+  }
+  #main-content {
+    padding-top: var(--appbar-height);
+  }
 }
 
 /* Scroll reveal — initial state */
@@ -180,17 +225,35 @@ body {
   }
 }
 
-
-
-/* App bar — minimal messaging-app style */
+/* App bar — fixed at top, solid background so it always shows */
 .appbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 60;
-  backdrop-filter: saturate(1.3) blur(14px);
-  background: color-mix(in oklab, var(--surface), transparent 8%);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  isolation: isolate;
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  backdrop-filter: saturate(1.4) blur(20px);
+  -webkit-backdrop-filter: saturate(1.4) blur(20px);
+  background: var(--surface-1);
   border-bottom: 1px solid var(--outline);
-  box-shadow: 0 1px 0 0 var(--outline);
+  box-shadow: 0 1px 0 0 color-mix(in oklab, var(--outline), transparent 40%);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.appbar.scrolled {
+  background: var(--surface-1);
+  border-bottom-color: var(--outline);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 0 0 color-mix(in oklab, var(--outline), transparent 30%);
+}
+/* When drawer is open on mobile: no line between appbar and drawer */
+@media (max-width: 880px) {
+  .appbar.drawer-open {
+    background: #fff;
+    border-bottom: none;
+    box-shadow: none;
+  }
 }
 /* Industry-standard: single max-width + horizontal padding so header, main, footer align */
 .container {
@@ -199,13 +262,36 @@ body {
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
+
+@media (max-width: 480px) {
+  .appbar .container {
+    padding-inline: 16px;
+  }
+}
+@media (max-width: 360px) {
+  .appbar .container {
+    padding-inline: 12px;
+  }
+}
 .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--grid-gap);
-  padding: 16px 0;
+  padding: 0;
   width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+@media (max-width: 880px) {
+  .appbar .row {
+    height: 56px;
+  }
+}
+@media (max-width: 480px) {
+  .appbar .row {
+    height: 52px;
+  }
 }
 
 .brand {
@@ -214,8 +300,20 @@ body {
   gap: 10px;
   text-decoration: none;
   color: var(--text);
+  border-radius: 12px;
+  padding: 6px 4px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
+.brand:hover {
+  opacity: 0.92;
+}
+.brand:hover .logo img {
+  transform: scale(1.02);
+}
+.brand:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 .brand-name {
   font: 700 18px/1 Sora, sans-serif;
   letter-spacing: 0.02em;
@@ -232,91 +330,354 @@ body {
   height: 50px;
   width: 150px;
   display: block;
-  object-fit: contain; /* keeps aspect ratio inside */
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 881px) {
+  .appbar .logo img {
+    height: 44px;
+    width: 132px;
+  }
+}
+@media (max-width: 880px) {
+  .appbar .logo img {
+    height: 38px;
+    width: 114px;
+  }
+}
+@media (max-width: 360px) {
+  .appbar .logo img {
+    height: 34px;
+    width: 102px;
+  }
 }
 
 .nav {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  align-items: center;
+  position: relative;
+  visibility: visible;
+  transform: none;
+}
+
+/* Desktop: ensure nav stays inline and visible (override any mobile leak) */
+@media (min-width: 881px) {
+  .nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    visibility: visible;
+    transform: none;
+    width: auto;
+    max-width: none;
+    height: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    z-index: auto;
+  }
+  .nav a {
+    opacity: 0.9;
+    transform: none;
+  }
+  .nav a:hover {
+    transform: translateY(-2px);
+  }
+  .hamburger {
+    display: none !important;
+  }
 }
 
 .nav a {
   color: var(--text);
   text-decoration: none;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 0.95rem;
-  opacity: 0.92;
-  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
+  font-size: 0.94rem;
+  opacity: 0.9;
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .nav a:hover {
-  background: color-mix(in oklab, var(--primary), transparent 92%);
+  background: color-mix(in oklab, var(--primary), transparent 90%);
   color: var(--primary);
   opacity: 1;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.nav a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.nav a.active {
+  background: color-mix(in oklab, var(--primary), transparent 82%);
+  color: var(--primary);
+  opacity: 1;
+}
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary), transparent 70%);
+}
+.nav a:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+.nav a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 50%;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center center;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
 }
 
 .hamburger {
   display: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   border: 1px solid var(--outline);
-  background: transparent;
+  background: color-mix(in oklab, var(--surface), white 4%);
   position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.hamburger:hover {
+  background: color-mix(in oklab, var(--primary), transparent 92%);
+  border-color: color-mix(in oklab, var(--primary), transparent 60%);
+}
+.hamburger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.hamburger.open {
+  background: color-mix(in oklab, var(--primary), transparent 88%);
+  border-color: color-mix(in oklab, var(--primary), transparent 50%);
 }
 
 .hamburger span {
   position: absolute;
   left: 10px;
   right: 10px;
-  height: 2px;
+  height: 2.5px;
   background: var(--text);
   border-radius: 2px;
-  transition: 0.2s;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
 }
 
 .hamburger span:nth-child(1) {
-  top: 12px;
+  top: 13px;
 }
 .hamburger span:nth-child(2) {
-  top: 20px;
+  top: 21px;
 }
 .hamburger span:nth-child(3) {
-  top: 28px;
+  top: 29px;
 }
 
 .hamburger.open span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
-
 .hamburger.open span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
-
 .hamburger.open span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Mobile: full-screen overlay behind drawer — dim + blur (glassmorphism); blocks background */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+.nav-overlay.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (min-width: 881px) {
+  .nav-overlay {
+    display: none;
+  }
+}
+
+/* Mobile: full-screen drawer below navbar — solid white, above overlay, no blur */
 @media (max-width: 880px) {
   .nav {
     position: fixed;
-    inset: 64px 16px auto 16px;
-    background: var(--surface-1);
-    padding: 12px;
-    border: 1px solid var(--outline);
-    border-radius: 16px;
-    box-shadow: var(--shadow-3);
-    display: none;
+    top: var(--appbar-height);
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    height: calc(100% - var(--appbar-height));
+    padding: 16px 0 max(24px, env(safe-area-inset-bottom, 0px)) 0;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+    z-index: 95;
+    opacity: 1;
+    display: flex;
     flex-direction: column;
+    gap: 4px;
+    align-items: stretch;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s ease;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
+  .nav a {
+    min-height: 48px;
+    padding: 14px 20px;
+    margin: 0 12px;
+    border-radius: 14px;
+    font-size: 1rem;
     display: flex;
+    align-items: center;
+    color: #1a1a1a;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .nav a::before {
+    display: none;
+  }
+  .nav.open a {
+    opacity: 1;
+    transform: translateX(0);
+    color: #1a1a1a;
+  }
+  .nav.open a:nth-child(1) { transition-delay: 0.05s; }
+  .nav.open a:nth-child(2) { transition-delay: 0.1s; }
+  .nav.open a:nth-child(3) { transition-delay: 0.15s; }
+  .nav.open a:nth-child(4) { transition-delay: 0.2s; }
+  .nav.open a:nth-child(5) { transition-delay: 0.25s; }
+  .nav.open a:nth-child(6) { transition-delay: 0.3s; }
+  .nav a:hover {
+    transform: translateX(6px);
+    background: rgba(0, 0, 0, 0.06);
+    color: #1a1a1a;
+  }
+  .nav.open a:hover {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+  .nav a.active {
+    background: rgba(0, 0, 0, 0.08);
+    color: #1a1a1a;
+    opacity: 1;
+  }
+  .nav a.active::after {
+    left: 20px;
+    transform: none;
+  }
+  /* Override global .nav a { opacity: 0.9 } so drawer links are full contrast */
+  .nav.open a,
+  .nav.open a:hover,
+  .nav.open a.active {
+    opacity: 1;
   }
   .hamburger {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 12px 0 max(20px, env(safe-area-inset-bottom, 0px)) 0;
+  }
+  .nav a {
+    min-height: 48px;
+    padding: 14px 16px;
+    margin: 0 10px;
+    font-size: 0.98rem;
+  }
+  .nav a.active::after {
+    left: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav {
+    padding: 10px 0 max(16px, env(safe-area-inset-bottom, 0px)) 0;
+  }
+  .nav a {
+    padding: 12px 14px;
+    margin: 0 8px;
+    font-size: 0.95rem;
+  }
+  .nav a.active::after {
+    left: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appbar,
+  .appbar.scrolled,
+  .nav a,
+  .nav a::before,
+  .nav a.active::after,
+  .logo img,
+  .hamburger,
+  .hamburger span,
+  .nav-overlay,
+  .nav.open a {
+    transition-duration: 0.01ms !important;
+  }
+  .nav.open a:nth-child(1),
+  .nav.open a:nth-child(2),
+  .nav.open a:nth-child(3),
+  .nav.open a:nth-child(4),
+  .nav.open a:nth-child(5),
+  .nav.open a:nth-child(6) {
+    transition-delay: 0s;
   }
 }
 
@@ -374,12 +735,26 @@ body {
   transform: scaleX(0);
   background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
   border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 12px color-mix(in oklab, var(--primary), transparent 50%);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Section base — consistent vertical rhythm */
 .section {
   position: relative;
   padding: var(--section-padding-y) 0;
+}
+@media (max-width: 880px) {
+  .section {
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+}
+@media (max-width: 480px) {
+  .section {
+    padding-top: 16px;
+    padding-bottom: 40px;
+  }
 }
 .section .container {
   display: flex;
@@ -429,23 +804,34 @@ body {
 /* Hero — messaging-app style: copy left, phone + chat preview right */
 .hero {
   position: relative;
-  padding: calc(var(--section-padding-y) * 0.6) 0 20px;
+  padding: 24px 0 20px;
   overflow: hidden;
   overflow-x: clip;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Shaded background like About us / .section.alt */
+  /* Layered bg: base gradient + .bg-anim orbs + .hero::after dot grid */
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--surface-1) 98%, black) 0%,
+      color-mix(in oklab, var(--surface-1), transparent 8%) 50%,
+      color-mix(in oklab, var(--surface), transparent 4%) 100%
+    );
+  border-bottom: 1px solid var(--outline);
+}
+/* Light theme: hero bg matches navbar — clean white, no lavender block */
+body.light .hero {
   background: linear-gradient(
     180deg,
-    color-mix(in oklab, var(--surface-1), transparent 5%),
-    color-mix(in oklab, var(--surface), transparent 2%)
+    #ffffff 0%,
+    #fafbfc 50%,
+    #f5f6f8 100%
   );
-  border-bottom: 1px solid var(--outline);
 }
 @media (min-width: 960px) {
   .hero {
-    padding-top: calc(var(--section-padding-y) + 12px);
+    padding-top: 32px;
     padding-bottom: 24px;
   }
 }
@@ -688,33 +1074,19 @@ body {
   }
 }
 
-/* Small phones: tighter fit, still readable */
+/* Small phones: bubbles stay inside phone, slightly smaller */
 @media (max-width: 480px) {
-  .hero .chat-top,
-  .hero .chat-bottom {
-    left: clamp(-32px, -12vw, -16px);
-  }
-  .hero .chat-middle {
-    right: clamp(-32px, -12vw, -16px);
-  }
   .hero .chat-bubble {
-    max-width: min(145px, 48vw);
+    max-width: min(160px, 52%);
     padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 14px);
     font-size: clamp(11px, 3vw, 12px);
   }
 }
 
-/* Very small viewports: bubbles stay fitted, min readable size */
+/* Very small viewports: bubbles inside phone, min readable size */
 @media (max-width: 360px) {
-  .hero .chat-top,
-  .hero .chat-bottom {
-    left: clamp(-20px, -8vw, 0);
-  }
-  .hero .chat-middle {
-    right: clamp(-20px, -8vw, 0);
-  }
   .hero .chat-bubble {
-    max-width: min(130px, 52vw);
+    max-width: min(140px, 55%);
     padding: 8px 10px;
     font-size: 11px;
   }
@@ -728,7 +1100,7 @@ body {
   50% { transform: translateY(-6px); }
 }
 
-/* Stack chat bubbles below phone on tablet and mobile — no overflow, phone stays responsive */
+/* Tablet and mobile: keep bubbles inside phone bounds so they are never clipped */
 @media (max-width: 959px) {
   .hero .container.hero-split {
     overflow-x: hidden;
@@ -745,6 +1117,20 @@ body {
     transform: scale(1);
     transform-origin: center center;
     max-width: 100%;
+  }
+  /* Position bubbles inside the phone frame so they are fully visible (no clipping) */
+  .hero .chat-top,
+  .hero .chat-bottom {
+    left: 12px;
+    right: auto;
+  }
+  .hero .chat-middle {
+    right: 12px;
+    left: auto;
+    margin-top: 118px;
+  }
+  .hero .chat-bubble {
+    max-width: min(200px, 58%);
   }
 }
 
@@ -1003,17 +1389,22 @@ h1 {
   letter-spacing: 0.01em;
 }
 
-/* Animated background for hero */
-.bg-anim {
+/* Animated background for hero (sits inside .hero) */
+.hero .bg-anim {
   position: absolute;
-  inset: -30% -15% -30% -15%;
+  inset: -20% -10% -25% -10%;
   background:
-    radial-gradient(circle at 20% 30%, color-mix(in oklab, var(--grad-a), transparent 60%) 0%, transparent 45%),
-    radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--grad-b), transparent 55%) 0%, transparent 45%),
-    radial-gradient(ellipse 100% 60% at 50% 100%, color-mix(in oklab, var(--secondary), transparent 90%) 0%, transparent 50%);
-  filter: saturate(1.15);
+    radial-gradient(circle at 20% 30%, color-mix(in oklab, var(--grad-a), transparent 50%) 0%, transparent 50%),
+    radial-gradient(circle at 80% 25%, color-mix(in oklab, var(--grad-b), transparent 50%) 0%, transparent 50%),
+    radial-gradient(ellipse 120% 70% at 50% 100%, color-mix(in oklab, var(--secondary), transparent 85%) 0%, transparent 55%);
+  filter: saturate(1.2);
   animation: bgMove 20s ease-in-out infinite alternate;
   z-index: -1;
+  pointer-events: none;
+}
+/* Light theme: very subtle orbs so hero stays white/neutral */
+body.light .hero .bg-anim {
+  opacity: 0.5;
 }
 .hero::after {
   content: "";
@@ -1021,7 +1412,7 @@ h1 {
   inset: 0;
   background-image: radial-gradient(circle, var(--outline) 1px, transparent 1px);
   background-size: 24px 24px;
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
   z-index: 0;
 }
@@ -1955,7 +2346,7 @@ textarea {
   font-weight: 600;
 }
 .breadcrumb a:hover {
-  text-decoration: underline;
+  text-decoration: underline;v
   color: var(--grad-b);
 }
 .breadcrumb span:last-child {

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>WibeIt | Secure Messaging App | Encrypted Chat App | End to End Encrypted Chat</title>
 
@@ -190,19 +190,21 @@
             loading="lazy" decoding="async" />
         </div>
       </a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" id="primary-nav" aria-label="Primary">
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
         <a href="#about">About</a>
         <a href="#showcase">Showcase</a>
+        <a href="#faqs">FAQs</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="hamburger" aria-label="Toggle menu">
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="progress" aria-hidden="true"><span></span></div>
   </header>
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
   <main id="main-content" role="main">
     <!-- Hero -->
@@ -476,11 +478,11 @@
         <div class="faq">
           <details class="faq-card reveal">
             <summary>
-              <span class="material-symbols-outlined">help</span>What is Wibeit?
+              <span class="material-symbols-outlined">help</span>What is WibeIT?
               <span class="material-symbols-outlined chev">expand_more</span>
             </summary>
             <p>
-              Wibeit is a secure messaging application designed to provide
+              WibeIT is a secure messaging application designed to provide
               private, safe, and confidential communication. With end to end
               encryption, only you and the person you’re communicating with can
               read your messages.
@@ -489,36 +491,36 @@
           <details class="faq-card reveal d1">
             <summary>
               <span class="material-symbols-outlined">help</span> How does
-              Wibeit ensure my messages are secure?
+              WibeIT ensure my messages are secure?
               <span class="material-symbols-outlined chev">expand_more</span>
             </summary>
             <p>
-              Wibeit uses P2P encryption built on some of the best encryption algorithms in 2026. Messages are encrypted
-              on your device before being sent and can only be decrypted by the recipient’s device. Even Wibeit cannot
+              WibeIT uses P2P encryption built on some of the best encryption algorithms in 2026. Messages are encrypted
+              on your device before being sent and can only be decrypted by the recipient’s device. Even WibeIT cannot
               access or read your messages.
             </p>
           </details>
           <details class="faq-card reveal d2">
             <summary>
-              <span class="material-symbols-outlined">help</span> Does Wibeit
+              <span class="material-symbols-outlined">help</span> Does WibeIT
               collect personal data?
               <span class="material-symbols-outlined chev">expand_more</span>
             </summary>
             <p>
-              Wibeit collects only the minimal information required to provide
+              WibeIT collects only the minimal information required to provide
               the Service, such as your phone number or email for account
-              verification. Conversations and media are never stored on Wibeit
+              verification. Conversations and media are never stored on WibeIT
               servers and cannot be accessed by us.
             </p>
           </details>
           <details class="faq-card reveal d2">
             <summary>
-              <span class="material-symbols-outlined">help</span> Is Wibeit free
+              <span class="material-symbols-outlined">help</span> Is WibeIT free
               to use?
               <span class="material-symbols-outlined chev">expand_more</span>
             </summary>
             <p>
-              Yes. Wibeit is free to download and use. While premium features
+              Yes. WibeIT is free to download and use. While premium features
               may be added in the future, core messaging and calling will remain
               free.
             </p>
