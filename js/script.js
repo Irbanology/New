@@ -119,51 +119,85 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
-// FAQ smooth open/close (animate height instead of instant toggle)
+// FAQ smooth open/close: wrap content in .faq-content, animate height + opacity, aria-expanded, no double-toggle
 const faqCards = $$('.faq-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (faqCards.length && !prefersReducedMotion) {
-  const DURATION_MS = 350;
+  const DURATION_MS = 420;
+  const EASE_OPEN = 'cubic-bezier(0.4, 0, 0.2, 1)';   // smooth ease-out
+  const EASE_CLOSE = 'cubic-bezier(0.4, 0, 0.2, 1)';  // same for consistent feel
+  const TRANSITION = 'height ' + (DURATION_MS / 1000) + 's ' + EASE_OPEN + ', opacity ' + (DURATION_MS * 0.6 / 1000) + 's ease-out';
   faqCards.forEach(function (details) {
+    details.classList.add('faq-smooth');
     const summary = details.querySelector('summary');
-    const content = details.querySelector('p');
-    if (!summary || !content) return;
+    let p = details.querySelector('p');
+    if (!summary || !p) return;
+    var content = details.querySelector('.faq-content');
+    if (!content) {
+      content = document.createElement('div');
+      content.className = 'faq-content';
+      content.setAttribute('role', 'region');
+      p.parentNode.insertBefore(content, p);
+      content.appendChild(p);
+    }
+    var animating = false;
+    var wasClosing = false;
+    function clearContentStyles() {
+      content.style.removeProperty('height');
+      content.style.removeProperty('overflow');
+      content.style.removeProperty('transition');
+      content.style.removeProperty('max-height');
+      content.style.removeProperty('opacity');
+    }
+    function onTransitionEnd(ev) {
+      if (ev.target !== content || (ev.propertyName !== 'height' && ev.propertyName !== 'opacity')) return;
+      content.removeEventListener('transitionend', onTransitionEnd);
+      animating = false;
+      clearContentStyles();
+      if (wasClosing) details.open = false;
+      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    }
     summary.addEventListener('click', function (e) {
       e.preventDefault();
-      const isOpening = !details.open;
+      if (animating) return;
+      var isOpening = !details.open;
+      animating = true;
+      wasClosing = !isOpening;
       if (isOpening) {
         details.open = true;
-        const endHeight = content.scrollHeight;
-        content.style.height = '0px';
-        content.style.overflow = 'hidden';
-        content.style.transition = 'none';
-        content.offsetHeight; // reflow
-        content.style.transition = 'height ' + (DURATION_MS / 1000) + 's ease';
-        content.style.height = endHeight + 'px';
-        const onEnd = function () {
-          content.removeEventListener('transitionend', onEnd);
-          content.style.height = '';
-          content.style.overflow = '';
-          content.style.transition = '';
-        };
-        content.addEventListener('transitionend', onEnd);
-      } else {
-        const startHeight = content.scrollHeight;
-        content.style.height = startHeight + 'px';
-        content.style.overflow = 'hidden';
-        content.style.transition = 'height ' + (DURATION_MS / 1000) + 's ease';
+        summary.setAttribute('aria-expanded', 'true');
+        var endHeight = content.scrollHeight;
+        content.style.setProperty('height', '0px');
+        content.style.setProperty('opacity', '0');
+        content.style.setProperty('overflow', 'hidden');
+        content.style.setProperty('max-height', 'none');
+        content.style.setProperty('transition', 'none');
         content.offsetHeight;
-        content.style.height = '0px';
-        const onEnd = function () {
-          content.removeEventListener('transitionend', onEnd);
-          details.open = false;
-          content.style.height = '';
-          content.style.overflow = '';
-          content.style.transition = '';
-        };
-        content.addEventListener('transitionend', onEnd);
+        content.style.setProperty('transition', TRANSITION);
+        content.style.setProperty('height', endHeight + 'px');
+        content.style.setProperty('opacity', '1');
+      } else {
+        var startHeight = content.scrollHeight;
+        content.style.setProperty('height', startHeight + 'px');
+        content.style.setProperty('opacity', '1');
+        content.style.setProperty('overflow', 'hidden');
+        content.style.setProperty('max-height', 'none');
+        content.style.setProperty('transition', 'height ' + (DURATION_MS / 1000) + 's ' + EASE_CLOSE + ', opacity ' + (DURATION_MS * 0.4 / 1000) + 's ease-in');
+        content.offsetHeight;
+        content.style.setProperty('height', '0px');
+        content.style.setProperty('opacity', '0');
       }
+      content.addEventListener('transitionend', onTransitionEnd);
+      setTimeout(function () {
+        if (animating) {
+          animating = false;
+          if (wasClosing) details.open = false;
+          clearContentStyles();
+          summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+        }
+      }, DURATION_MS + 100);
     });
+    summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
   });
 }
 
