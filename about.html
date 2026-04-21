@@ -37,18 +37,21 @@
             <img src="images/wibeIt_black.png" alt="WibeIt Logo" width="150" height="50" />
           </div>
         </a>
-        <nav class="nav" aria-label="Primary">
-          <a href="index.html#about" class="active">About</a>
+        <nav class="nav" id="primary-nav" aria-label="Primary">
+          <a href="index.html#how">How it works</a>
           <a href="index.html#features">Features</a>
           <a href="index.html#showcase">Showcase</a>
-          <a href="index.html#contact">Contact</a>
+          <a href="index.html#faqs">FAQs</a>
+          <!-- <a href="about.html" class="active">About</a> -->
+          <!-- <a href="contactus.html">Contact</a> -->
         </nav>
-        <button class="hamburger" aria-label="Toggle menu">
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
       </div>
       <div class="progress" aria-hidden="true"><span></span></div>
     </header>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a> <span aria-hidden="true">/</span> <span>About Us</span>
