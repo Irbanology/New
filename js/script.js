@@ -8,7 +8,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Navbar: active section on scroll (section.offsetTop - 120)
 const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav a[href^='#']");
+const navLinks = document.querySelectorAll(".nav a");
+const samePageHashLinks = [...navLinks].filter((a) => {
+  try {
+    const url = new URL(a.getAttribute("href") || "", window.location.href);
+    return url.pathname === window.location.pathname && url.hash;
+  } catch {
+    return false;
+  }
+});
 
 function setActiveNav() {
   let current = "";
@@ -18,9 +26,11 @@ function setActiveNav() {
       current = section.getAttribute("id") || "";
     }
   });
-  navLinks.forEach((a) => {
+  samePageHashLinks.forEach((a) => {
+    const href = a.getAttribute("href") || "";
+    const hash = href.includes("#") ? href.slice(href.indexOf("#")) : "";
     a.classList.remove("active");
-    if (a.getAttribute("href") === "#" + current) {
+    if (hash === "#" + current) {
       a.classList.add("active");
     }
   });
@@ -250,7 +260,7 @@ if (faqCards.length && !prefersReducedMotion) {
 
 // Typing effect for hero title (skipped when user prefers reduced motion)
 const typingEl = $('#typing');
-const phrase = 'Secure Messaging App End to End Encrypted Chat You Can Trust';
+const phrase = 'Secure Messaging App Built for Private Communication';
 if (typingEl) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
@@ -270,7 +280,7 @@ const slider = $('.slider');
 const slides = $('.slides');
 const imgs = $$('.slides img');
 const dots = $('.dots');
-let idx = 0, timer, playing = true, touchStartX = null;
+let idx = 0, touchStartX = null;
 
 if (slider && slides) {
   function renderDots() {
@@ -287,7 +297,10 @@ if (slider && slides) {
   }
   function go(i) {
     idx = (i + imgs.length) % imgs.length;
-    slides.style.transform = 'translateX(-' + (idx*100) + '%)';
+    imgs.forEach((img, imgIdx) => {
+      img.classList.toggle('active', imgIdx === idx);
+      img.setAttribute('aria-hidden', imgIdx === idx ? 'false' : 'true');
+    });
     if (dots) $$('.dot', dots).forEach((d, di) => {
       d.classList.toggle('active', di === idx);
       d.setAttribute('aria-current', di === idx ? 'true' : 'false');
@@ -295,15 +308,11 @@ if (slider && slides) {
   }
   function next(){ go(idx+1); }
   function prev(){ go(idx-1); }
-  function start() { stop(); timer = setInterval(next, 4000); playing = true; }
-  function stop() { clearInterval(timer); playing = false; }
 
   const nextBtn = $('.next');
   const prevBtn = $('.prev');
   if (nextBtn) nextBtn.onclick = next;
   if (prevBtn) prevBtn.onclick = prev;
-  slider.addEventListener('mouseenter', stop);
-  slider.addEventListener('mouseleave', start);
   slides.addEventListener('touchstart', (e)=> touchStartX = e.touches[0].clientX, {passive:true});
   slides.addEventListener('touchend', (e)=>{
     if (touchStartX===null) return;
@@ -313,20 +322,36 @@ if (slider && slides) {
   }, {passive:true});
   renderDots();
   go(0);
-  start();
 }
 
-// ===== Smooth scroll for nav (same-page anchors only) =====
+// ===== Smooth scroll for nav (same-page hash links) =====
 $$('.nav a').forEach(a => {
   a.addEventListener('click', (e) => {
     const href = a.getAttribute('href') || '';
-    if (href.startsWith('#')) {
+    const isHashLink = href.includes('#');
+    if (!isHashLink) return;
+    const hash = href.slice(href.indexOf('#'));
+    const target = document.querySelector(hash);
+    if (target) {
       e.preventDefault();
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'smooth' });
+      if (window.location.hash !== hash) {
+        history.pushState(null, '', hash);
+      }
       if (nav) nav.classList.remove('open');
       if (hamb) hamb.classList.remove('open');
     }
+  });
+});
+
+// Smoothly align section when arriving with a hash
+window.addEventListener('load', () => {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
