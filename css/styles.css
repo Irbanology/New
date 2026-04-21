@@ -1331,8 +1331,8 @@ h1 {
 .store-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 8px;
+  padding: 10px 10px;
   border-radius: 999px;
   text-decoration: none;
   color: var(--on-primary);
