@@ -1,150 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>WIBEIT SECURE | Private Chat App Built for Real Privacy</title>
-  <meta name="description" content="Wibeit Secure is a private and secure messaging app built for real privacy without tracking or profiling." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://wibeit.co/wibeitsecure.html" />
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png" />
-  <link rel="apple-touch-icon" href="images/favicon.png" />
-  <meta name="theme-color" content="#ffffff" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>WIBEIT SECURE | Private Chat App Built for Real Privacy</title>
+    <meta name="description"
+        content="Wibeit Secure is a private and secure messaging app built for real privacy without tracking or profiling." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://wibeit.co/wibeitsecure.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png" />
+    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <meta name="theme-color" content="#ffffff" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700;800&display=swap"
-    rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&display=swap" rel="stylesheet" />
-  </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&display=swap"
+            rel="stylesheet" />
+    </noscript>
 
-  <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a private chat app?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A private chat app protects communication by minimizing data collection, preventing tracking, and ensuring only intended recipients can access messages."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Wibeit a truly private messaging app?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Wibeit combines end-to-end encryption with a no-tracking, minimal-data architecture."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Wibeit access my messages?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Messages are encrypted on your device and cannot be accessed by Wibeit or any third party."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Wibeit collect user data?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only essential system-level data is used. No behavioral tracking or profiling is performed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is Wibeit different from other messaging apps?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlike traditional apps, Wibeit removes tracking, metadata profiling, and data collection—not just message encryption."
+              }
+            }
+          ]
+        }
+        </script>
+
 </head>
+
 <body class="light" oncontextmenu="return false">
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header class="appbar" role="banner">
-    <div class="container row">
-      <a href="index.html" class="brand" aria-label="Go to home">
-        <div class="logo">
-          <img src="images/wibeIt_black.png" alt="WibeIt Private Messaging App logo" width="150" height="50" loading="lazy"
-            decoding="async" />
-        </div>
-      </a>
-      <nav class="nav" id="primary-nav" aria-label="Primary">
-        <a href="index.html#how">How it works</a>
-        <a href="index.html#features">Features</a>
-        <a href="about.html">About</a>
-        <a href="index.html#showcase">Showcase</a>
-        <a href="wibeitsecure.html" aria-current="page">Wibeit Secure</a>
-        <a href="index.html#faqs">FAQs</a>
-        <a href="contactus.html">Contact</a>
-      </nav>
-      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="progress" aria-hidden="true"><span></span></div>
-  </header>
-  <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
-
-  <main id="main-content" role="main">
-    <section class="hero" id="home" aria-labelledby="secure-heading">
-      <div class="bg-anim"></div>
-      <div class="blob b1" aria-hidden="true"></div>
-      <div class="blob b2" aria-hidden="true"></div>
-      <div class="container hero-split">
-        <div class="hero-copy">
-          <p class="kicker reveal" aria-hidden="true">WIBEIT SECURE</p>
-          <h1 id="secure-heading" class="reveal d1">
-            <span class="accent">Private Chat App Built for Real Privacy</span>
-            <br />
-            (Secure Messaging Without Tracking)
-          </h1>
-          <p class="lead reveal d2">
-            Wibeit is a private and secure messaging app designed for real communication privacy - not just encryption.
-            There is no tracking, no profiling, and no access to your messages. Every message, call, and file stays fully
-            protected from start to finish.
-          </p>
-          <div class="cta reveal d3">
-            <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.wibeit"" target="_blank" rel="noopener noreferrer"
-              data-ripple aria-label="Start private messaging now on Wibeit">
-              Start Private Messaging Now
+    <header class="appbar" role="banner">
+        <div class="container row">
+            <a href="index.html" class="brand" aria-label="Go to home">
+                <div class="logo">
+                    <img src="images/wibeIt_black.png" alt="WibeIt Private Messaging App logo" width="150" height="50"
+                        loading="lazy" decoding="async" />
+                </div>
             </a>
-            <!-- <a class="btn tonal" href="https://play.google.com/store/apps/details?id=com.wibeit" target="_blank"
+            <nav class="nav" id="primary-nav" aria-label="Primary">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#showcase">Showcase</a>
+                <a href="about.html">About</a>
+                <!-- <a href="wibeitsecure.html" aria-current="page">Wibeit Secure</a> -->
+                <!-- <a href="index.html#faqs">FAQs</a> -->
+                <a href="contactus.html">Contact</a>
+            </nav>
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="progress" aria-hidden="true"><span></span></div>
+    </header>
+
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+    <main id="main-content" role="main">
+        <section class="hero" id="home" aria-labelledby="secure-heading">
+            <div class="bg-anim"></div>
+            <div class="blob b1" aria-hidden="true"></div>
+            <div class="blob b2" aria-hidden="true"></div>
+            <div class="container hero-split">
+                <div class="hero-copy">
+                    <p class="kicker reveal" aria-hidden="true">WIBEIT SECURE</p>
+                    <h1 id="secure-heading" class="reveal d1">
+                        <span class="accent">Private Chat App Built for Real Privacy</span>
+                        <br />
+                    </h1>
+                    <h3>
+
+                        (Secure Messaging Without Tracking)
+                    </h3>
+                    <p class="lead reveal d2">
+                        Wibeit is a private and secure messaging app designed for real communication privacy not just
+                        encryption.
+                        There is no tracking, no profiling, and no access to your messages. Every message, call, and
+                        file stays fully
+                        protected from start to finish.
+                    </p>
+                    <div class="cta reveal d3">
+                        <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.wibeit"
+                            target="_blank" rel="noopener noreferrer" data-ripple
+                            aria-label="Start private messaging now on Wibeit">
+                            Start Private Messaging Now
+                        </a>
+                        <!-- <a class="btn tonal" href="https://play.google.com/store/apps/details?id=com.wibeit" target="_blank"
               rel="noopener noreferrer" data-ripple aria-label="Download Wibeit secure messaging app">
               Download Wibeit
             </a> -->
-          </div>
-          <p class="section-desc reveal d3">Your conversations are not data. They are yours.</p>
-        </div>
-       
-      </div>
-    </section>
-  </main>
+                    </div>
+                    <p class="lead reveal d3">Your conversations are not data. They are yours.</p>
+                </div>
+                <div class="hero-right reveal d2">
+                    <div class="hero-visual secure-art">
+                        <img src="images/wibeit-secure-privacy-icon.svg" alt="Wibeit privacy and secure messaging icon"
+                            width="420" height="420" loading="lazy" decoding="async" />
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <footer class="footer-dark" role="contentinfo">
-    <div class="footer-top container">
-      <div class="foot-brand">
-        <a href="index.html" class="brand" aria-label="Go to home">
-          <div class="logo">
-            <img src="images/wibeIt_black.png" alt="WibeIt Private Messaging App logo" width="150" height="50" loading="lazy"
-              decoding="async" />
-          </div>
-        </a>
-      </div>
-      <nav class="foot-col" aria-label="About Us">
-        <h3 class="foot-col-title">About Us</h3>
-        <a href="index.html">Home</a>
-        <a href="index.html#features">Features</a>
-        <a href="index.html#showcase">Showcase</a>
-      </nav>
-      <nav class="foot-col" aria-label="Explore">
-        <h3 class="foot-col-title">Explore</h3>
-        <a href="index.html">Blog</a>
-        <a href="faqs.html">FAQs</a>
-      </nav>
-      <nav class="foot-col" aria-label="Policy">
-        <h3 class="foot-col-title">Policy</h3>
-        <a href="privacy_policy.html">Privacy Policy</a>
-        <a href="child_safety.html">Child Safety</a>
-        <a href="legal.html">Legal</a>
-        <a href="https://wibex-dd474.firebaseapp.com/" target="_blank" rel="noopener noreferrer">Delete Account</a>
-      </nav>
-      <nav class="foot-col" aria-label="Company">
-        <h3 class="foot-col-title">Company</h3>
-        <a href="about.html">About us</a>
-        <a href="contactus.html">Contact us</a>
-      </nav>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-bottom container">
-      <div class="foot-bottom-left">
-        <span class="foot-copy">© <span id="year"></span> Wibeit Technologies. All rights reserved.</span>
-        <a href="privacy_policy.html" class="foot-privacy">Privacy Policy</a>
-      </div>
-      <div class="foot-bottom-right">
-        <div class="foot-email">
-          <img src="images/mail.png" alt="Email icon" width="24" height="24" loading="lazy" decoding="async" />
-          <a href="mailto:support@wibeit.co">support@wibeit.co</a>
-        </div>
-        <div class="foot-social">
-          <a href="https://x.com/WibeIT" target="_blank" rel="noopener noreferrer" aria-label="WibeIt on X"><img
-              src="images/twitter.png" alt="X" width="24" height="24" loading="lazy" decoding="async" /></a>
-          <a href="https://www.instagram.com/wibe.it/" target="_blank" rel="noopener noreferrer" aria-label="WibeIt on Instagram"><img
-              src="images/instagram.png" alt="Instagram" width="24" height="24" loading="lazy" decoding="async" /></a>
-          <a href="https://www.facebook.com/people/Wibeit/61581175611436/" target="_blank" rel="noopener noreferrer"
-            aria-label="WibeIt on Facebook"><img src="images/facebook.png" alt="Facebook" width="24" height="24" loading="lazy"
-              decoding="async" /></a>
-        </div>
-      </div>
-    </div>
-  </footer>
+        <section id="features" class="section alt" aria-labelledby="secure-features-heading">
+            <span class="float f3" aria-hidden="true"></span>
+            <div class="container">
+                <h2 id="secure-features-heading" class="section-title">Key Features of Wibeit</h2>
+                <p class="section-desc">Built for private messaging without compromise.</p>
+                <div class="grid cols-3">
+                    <article class="card reveal">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">lock</span>
+                        </div>
+                        <h3> End-to-End Encrypted Messaging</h3>
+                        <p class="muted">
+                            All messages are encrypted directly on your device before being sent, ensuring that only the
+                            intended recipient can decrypt and read them. No intermediaries can access the content. </p>
+                    </article>
 
-  <script src="js/script.js" defer></script>
+                    <article class="card reveal d1">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">privacy_tip</span>
+                        </div>
+                        <h3>No Tracking or User Profiling</h3>
+                        <p class="muted">
+                            Wibeit does not track user activity, communication behavior, or usage patterns. There are no
+                            analytics systems or hidden monitoring processes running in the background of the
+                            application.
+                        </p>
+                    </article>
+
+                    <article class="card reveal d2">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">dns</span>
+                        </div>
+                        <h3>No Server Message Storage</h3>
+                        <p class="muted">
+                            Unlike traditional messaging platforms, Wibeit does not store user conversations on
+                            centralized servers. Messages exist only between sender and receiver and are never retained
+                            in readable form.
+                        </p>
+                    </article>
+
+                    <article class="card reveal">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">call</span>
+                        </div>
+                        <h3>Secure Voice Communication</h3>
+                        <p class="muted">
+                            Wibeit enables encrypted voice calls designed for stable performance and clear
+                            communication. All voice data is protected during transmission to ensure complete privacy
+                            and security.
+                        </p>
+                    </article>
+
+                    <article class="card reveal d1">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">upload_file</span>
+                        </div>
+                        <h3>Encrypted Media and File Sharing</h3>
+                        <p class="muted">
+                            Users can securely send images, videos, and documents with full encryption applied during
+                            transfer. Files are not permanently stored and remain accessible only to intended
+                            recipients.
+                        </p>
+                    </article>
+
+                    <article class="card reveal d2">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">groups</span>
+                        </div>
+                        <h3>Private Group Chats</h3>
+                        <p class="muted">
+                            Wibeit allows users to create and manage group conversations with the same level of privacy
+                            as individual chats. Group communication remains protected, controlled, and free from
+                            external access.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="secure-difference" class="section" aria-labelledby="difference-heading">
+            <div class="container secure-split-wrap">
+                <article class="secure-split-item reveal">
+                    <div class="secure-copy">
+                        <h2 id="difference-heading" class="section-title">What Makes Wibeit Different</h2>
+                        <p class="section-desc secure-left">
+                            Wibeit is a UAE chat app built for private communication without tracking, profiling, or
+                            metadata exposure.
+                            It goes beyond standard encryption by removing the systems that collect user behavior in
+                            most messaging platforms.
+                        </p>
+                        <p class="secure-sub">Unlike typical chat apps, Wibeit does not rely on:</p>
+                        <ul class="about-list">
+                            <li>Communication metadata storage</li>
+                            <li>User activity tracking</li>
+                            <li>Behavioral profiling systems</li>
+                        </ul>
+                        <p class="section-desc secure-left">
+                            Wibeit is designed as a secure messaging app UAE users can trust, offering private
+                            communication with no hidden data collection.
+                        </p>
+                    </div>
+                    <div class="secure-art-card" aria-hidden="true">
+                        <span class="material-symbols-outlined">encrypted</span>
+                        <h3>Privacy-First Core</h3>
+                        <p>No tracking layers. No metadata profiling. Only protected communication.</p>
+                    </div>
+                </article>
+
+                <article class="secure-split-item secure-split-reverse reveal d1">
+
+                    <div class="secure-copy">
+                        <h2 class="section-title">Built for Real-World Communication</h2>
+                        <p class="section-desc secure-left">
+                            Wibeit is designed for everyday use without compromising privacy.
+                        </p>
+                        <p class="secure-sub">It is ideal for:</p>
+                        <ul class="about-list">
+                            <li>Private personal conversations</li>
+                            <li>Global users and expats</li>
+                            <li>Professionals handling sensitive communication</li>
+                            <li>Privacy-focused individuals</li>
+                        </ul>
+                        <p class="section-desc secure-left">
+                            Whether you are chatting locally or internationally, Wibeit keeps communication secure and
+                            simple
+                        </p>
+                    </div>
+                    <div class="secure-art-card" aria-hidden="true">
+                        <span class="material-symbols-outlined">public</span>
+                        <h3>Ready for Daily Use</h3>
+                        <p>Built for real-world chats across countries, teams, and personal communication.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="use-cases" class="section alt secure-use-cases" aria-labelledby="secure-use-cases-heading">
+            <div class="container">
+                <h2 id="secure-use-cases-heading" class="section-title">Use Cases</h2>
+                <p class="section-desc">Same trusted privacy for personal and professional communication.</p>
+                <div class="grid cols-3">
+                    <article class="card reveal">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">chat</span>
+                        </div>
+                        <h3>Private Messaging</h3>
+                        <p class="muted">Communicate freely without surveillance or tracking.</p>
+                    </article>
+
+                    <article class="card reveal d1">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">business_center</span>
+                        </div>
+                        <h3>Secure Business Communication</h3>
+                        <p class="muted">Protect sensitive discussions and client information.</p>
+                    </article>
+
+                    <article class="card reveal d2">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">public</span>
+                        </div>
+                        <h3>International Communication</h3>
+                        <p class="muted">Stay connected globally without exposing behavioral data.</p>
+                    </article>
+
+                    <article class="card reveal secure-center-card">
+                        <div class="icn">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>Confidential File Sharing</h3>
+                        <p class="muted">Share documents and media securely with encryption.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="secure-principles" class="section" aria-labelledby="secure-principles-heading">
+            <div class="container secure-split-wrap">
+                <h2 id="secure-principles-heading" class="section-title">Core Privacy Principles</h2>
+
+                <article class="secure-split-item reveal">
+                    <div class="secure-copy">
+                        <h3>Privacy by Design</h3>
+                        <p class="section-desc secure-left">
+                            Wibeit is built on strict privacy principles to ensure your communication stays fully
+                            protected at all times.
+                        </p>
+                        <ul class="about-list">
+                            <li>No ad-based monetization</li>
+                            <li>No selling or sharing user data</li>
+                            <li>No hidden tracking systems</li>
+                            <li>Minimal system-level data only</li>
+                        </ul>
+                        <p class="section-desc secure-left">Your communication is never treated as a product.</p>
+                    </div>
+                    <div class="secure-art-card" aria-hidden="true">
+                        <span class="material-symbols-outlined">shield_lock</span>
+                        <h3>Privacy by Default</h3>
+                        <p>Designed to protect communication without hidden data tradeoffs.</p>
+                    </div>
+                </article>
+
+                <article class="secure-split-item secure-split-reverse reveal d1">
+                    <div class="secure-copy">
+                        <h3>Privacy vs Security</h3>
+                        <p class="section-desc secure-left">
+                            Encryption alone does not guarantee true privacy. Wibeit combines multiple layers to
+                            eliminate exposure
+                            beyond message content.
+                        </p>
+                        <ul class="about-list">
+                            <li>End-to-end encrypted communication</li>
+                            <li>Zero tracking or behavioral profiling</li>
+                            <li>Minimal data collection by design</li>
+                            <li>No metadata-based user analysis</li>
+                        </ul>
+                        <p class="section-desc secure-left">This ensures both security and real communication privacy.
+                        </p>
+                    </div>
+                    <div class="secure-art-card" aria-hidden="true">
+                        <span class="material-symbols-outlined">encrypted</span>
+                        <h3>Layered Protection</h3>
+                        <p>Security plus privacy controls that remove exposure beyond encryption.</p>
+                    </div>
+                </article>
+
+                <article class="secure-split-item reveal d2">
+                    <div class="secure-copy">
+                        <h3>Simple and Fast Experience</h3>
+                        <p class="section-desc secure-left">
+                            Wibeit is designed to keep privacy powerful but the experience simple, fast, and easy for
+                            everyone.
+                        </p>
+                        <ul class="about-list">
+                            <li>Quick and easy setup process</li>
+                            <li>Clean and minimal interface</li>
+                            <li>No technical knowledge required</li>
+                            <li>Smooth daily messaging experience</li>
+                        </ul>
+                        <p class="section-desc secure-left">You get secure communication without complexity.</p>
+                    </div>
+                    <div class="secure-art-card" aria-hidden="true">
+                        <span class="material-symbols-outlined">rocket_launch</span>
+                        <h3>Fast Everyday Messaging</h3>
+                        <p>Simple onboarding and smooth chat performance with privacy built in.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="secure-faqs" class="section alt" aria-labelledby="secure-faqs-heading">
+            <div class="container">
+                <h2 id="secure-faqs-heading" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq">
+                    <details class="faq-card reveal" open>
+                        <summary>
+                            <span class="faq-icon material-symbols-outlined" aria-hidden="true">help</span>
+                            <span>What is a private chat app?</span>
+                            <span class="chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+                        </summary>
+                        <div class="faq-content">
+                            <p>A private chat app protects communication by minimizing data collection, preventing
+                                tracking, and ensuring only intended recipients can access messages.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-card reveal d1">
+                        <summary>
+                            <span class="faq-icon material-symbols-outlined" aria-hidden="true">help</span>
+                            <span>Is Wibeit a truly private messaging app?</span>
+                            <span class="chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+                        </summary>
+                        <div class="faq-content">
+                            <p>Yes. Wibeit combines end-to-end encryption with a no-tracking, minimal-data architecture.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-card reveal d2">
+                        <summary>
+                            <span class="faq-icon material-symbols-outlined" aria-hidden="true">help</span>
+                            <span>Can Wibeit access my messages?</span>
+                            <span class="chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+                        </summary>
+                        <div class="faq-content">
+                            <p>No. Messages are encrypted on your device and cannot be accessed by Wibeit or any third
+                                party.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-card reveal">
+                        <summary>
+                            <span class="faq-icon material-symbols-outlined" aria-hidden="true">help</span>
+                            <span>Does Wibeit collect user data?</span>
+                            <span class="chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+                        </summary>
+                        <div class="faq-content">
+                            <p>Only essential system-level data is used. No behavioral tracking or profiling is
+                                performed.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-card reveal d1">
+                        <summary>
+                            <span class="faq-icon material-symbols-outlined" aria-hidden="true">help</span>
+                            <span>How is Wibeit different from other messaging apps?</span>
+                            <span class="chev material-symbols-outlined" aria-hidden="true">expand_more</span>
+                        </summary>
+                        <div class="faq-content">
+                            <p>Unlike traditional apps, Wibeit removes tracking, metadata profiling, and data
+                                collection-not just message encryption.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="secure-final-cta" class="section secure-final-cta" aria-label="Download Wibeit">
+            <div class="container">
+                <h2 class="section-title">Your conversations should stay private-not tracked, analyzed, or stored.</h2>
+                <div class="cta">
+                    <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.wibeit"
+                        target="_blank" rel="noopener noreferrer" data-ripple
+                        aria-label="Download Wibeit secure messaging app">
+                        Download Wibeit
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-dark" role="contentinfo">
+        <div class="footer-top container">
+            <div class="foot-brand">
+                <a href="index.html" class="brand" aria-label="Go to home">
+                    <div class="logo">
+                        <img src="images/wibeIt_black.png" alt="WibeIt Private Messaging App logo" width="150"
+                            height="50" loading="lazy" decoding="async" />
+                    </div>
+                </a>
+            </div>
+            <nav class="foot-col" aria-label="About Us">
+                <h3 class="foot-col-title">About Us</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#showcase">Showcase</a>
+            </nav>
+            <nav class="foot-col" aria-label="Explore">
+                <h3 class="foot-col-title">Explore</h3>
+                <a href="index.html">Blog</a>
+                <a href="faqs.html">FAQs</a>
+            </nav>
+            <nav class="foot-col" aria-label="Policy">
+                <h3 class="foot-col-title">Policy</h3>
+                <a href="privacy_policy.html">Privacy Policy</a>
+                <a href="child_safety.html">Child Safety</a>
+                <a href="legal.html">Legal</a>
+                <a href="https://wibex-dd474.firebaseapp.com/" target="_blank" rel="noopener noreferrer">Delete
+                    Account</a>
+            </nav>
+            <nav class="foot-col" aria-label="Company">
+                <h3 class="foot-col-title">Company</h3>
+                <a href="about.html">About us</a>
+                <a href="contactus.html">Contact us</a>
+            </nav>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom container">
+            <div class="foot-bottom-left">
+                <span class="foot-copy">© <span id="year"></span> Wibeit Technologies. All rights reserved.</span>
+                <a href="privacy_policy.html" class="foot-privacy">Privacy Policy</a>
+            </div>
+            <div class="foot-bottom-right">
+                <div class="foot-email">
+                    <img src="images/mail.png" alt="Email icon" width="24" height="24" loading="lazy"
+                        decoding="async" />
+                    <a href="mailto:support@wibeit.co">support@wibeit.co</a>
+                </div>
+                <div class="foot-social">
+                    <a href="https://x.com/WibeIT" target="_blank" rel="noopener noreferrer"
+                        aria-label="WibeIt on X"><img src="images/twitter.png" alt="X" width="24" height="24"
+                            loading="lazy" decoding="async" /></a>
+                    <a href="https://www.instagram.com/wibe.it/" target="_blank" rel="noopener noreferrer"
+                        aria-label="WibeIt on Instagram"><img src="images/instagram.png" alt="Instagram" width="24"
+                            height="24" loading="lazy" decoding="async" /></a>
+                    <a href="https://www.facebook.com/people/Wibeit/61581175611436/" target="_blank"
+                        rel="noopener noreferrer" aria-label="WibeIt on Facebook"><img src="images/facebook.png"
+                            alt="Facebook" width="24" height="24" loading="lazy" decoding="async" /></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
 </body>
+
 </html>

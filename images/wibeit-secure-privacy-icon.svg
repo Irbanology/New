@@ -1,0 +1,25 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="96" y1="80" x2="560" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C4DFF"/>
+      <stop offset="1" stop-color="#0EA5FF"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="320" y1="150" x2="320" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9EEFF"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="40" y="40" width="560" height="560" rx="130" fill="url(#bg)"/>
+  <circle cx="320" cy="320" r="210" fill="white" fill-opacity="0.12"/>
+  <circle cx="320" cy="320" r="170" fill="white" fill-opacity="0.16"/>
+
+  <path d="M320 160C276 194 226 206 190 212V324C190 424 260 486 320 512C380 486 450 424 450 324V212C414 206 364 194 320 160Z" fill="url(#shield)"/>
+  <path d="M320 218C291 243 258 252 234 256V326C234 393 281 438 320 456C359 438 406 393 406 326V256C382 252 349 243 320 218Z" fill="#EEF4FF"/>
+
+  <rect x="284" y="302" width="72" height="86" rx="18" fill="#7C4DFF"/>
+  <path d="M263 300C263 268 288 243 320 243C352 243 377 268 377 300V321H353V300C353 281 339 267 320 267C301 267 287 281 287 300V321H263V300Z" fill="#7C4DFF"/>
+  <circle cx="320" cy="343" r="10" fill="white"/>
+
+  <path d="M148 176L174 150M466 490L492 464M492 176L466 150M174 490L148 464" stroke="white" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round"/>
+</svg>

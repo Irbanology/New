@@ -385,11 +385,11 @@ body {
     z-index: auto;
   }
   .nav a {
-    opacity: 0.9;
+    opacity: 1;
     transform: none;
   }
   .nav a:hover {
-    transform: translateY(-2px);
+    transform: none;
   }
   .hamburger {
     display: none !important;
@@ -403,17 +403,17 @@ body {
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.94rem;
-  opacity: 0.9;
+  opacity: 1;
   transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
 .nav a:hover {
-  background: color-mix(in oklab, var(--primary), transparent 90%);
-  color: var(--primary);
+  background: transparent;
+  color: var(--text);
   opacity: 1;
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .nav a:focus-visible {
@@ -422,28 +422,19 @@ body {
 }
 
 .nav a.active {
-  background: color-mix(in oklab, var(--primary), transparent 82%);
-  color: var(--primary);
+  background: transparent;
+  color: var(--text);
   opacity: 1;
 }
 .nav a.active::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 6px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--primary);
-  transform: translateX(-50%);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary), transparent 70%);
+  display: none;
 }
 .nav a:hover::before {
-  opacity: 1;
-  transform: translateX(-50%) scaleX(1);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0);
 }
 .nav a::before {
-  content: "";
+  content: none;
   position: absolute;
   left: 50%;
   bottom: 8px;
@@ -597,17 +588,17 @@ body {
   .nav.open a:nth-child(5) { transition-delay: 0.25s; }
   .nav.open a:nth-child(6) { transition-delay: 0.3s; }
   .nav a:hover {
-    transform: translateX(6px);
-    background: rgba(0, 0, 0, 0.06);
+    transform: none;
+    background: transparent;
     color: #1a1a1a;
   }
   .nav.open a:hover {
-    transform: translateX(6px);
+    transform: none;
     opacity: 1;
   }
   .nav a.active {
-    background: rgba(0, 0, 0, 0.08);
-    color: #1a1a1a;
+    background: transparent;
+    color: var(--primary);
     opacity: 1;
   }
   .nav a.active::after {
@@ -960,6 +951,14 @@ body.light .hero {
 }
 .hero-right .hero-visual {
   width: auto;
+}
+.hero-right .secure-art {
+  width: 100%;
+}
+.hero-right .secure-art img {
+  width: min(420px, 100%);
+  height: auto;
+  filter: drop-shadow(0 18px 36px rgba(15, 23, 42, 0.22));
 }
 @media (min-width: 960px) {
   .hero-visual {
@@ -2464,4 +2463,95 @@ main#policy a.policy-link {
 #policy a.policy-link:hover,
 main#policy a.policy-link:hover {
   color: var(--secondary);
+}
+
+/* Wibeit Secure custom split section */
+.secure-split-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: stretch;
+}
+.secure-split-item {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.secure-copy {
+  width: 100%;
+}
+.secure-copy .section-title,
+.secure-copy .section-desc {
+  text-align: left;
+}
+.secure-copy .section-title::after {
+  left: 0;
+  transform: none;
+}
+.secure-copy .section-desc.secure-left {
+  margin: 0 0 16px;
+  max-width: 64ch;
+}
+.secure-sub {
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+.secure-art-card {
+  width: 100%;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    140deg,
+    color-mix(in oklab, var(--primary), transparent 88%),
+    color-mix(in oklab, var(--secondary), transparent 91%)
+  );
+  box-shadow: var(--shadow-1);
+  padding: 28px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.secure-art-card .material-symbols-outlined {
+  font-size: 42px;
+  color: var(--primary);
+}
+.secure-art-card h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  font-family: "Poppins", sans-serif;
+}
+.secure-art-card p {
+  margin: 0;
+  color: var(--muted);
+}
+@media (min-width: 960px) {
+  .secure-split-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(60px, 6vw, 80px);
+  }
+  .secure-split-item.secure-split-reverse {
+    flex-direction: row-reverse;
+  }
+  .secure-split-item .secure-copy,
+  .secure-split-item .secure-art-card {
+    width: 45%;
+  }
+  .secure-split-item .secure-art-card {
+    min-height: 360px;
+  }
+}
+
+@media (min-width: 880px) {
+  .secure-use-cases .secure-center-card {
+    grid-column: 2 / span 1;
+  }
+}
+.secure-final-cta .cta {
+  justify-content: center;
 }
