@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
 :root {
   /* Layout — industry-standard alignment */
@@ -66,6 +66,20 @@ body.light {
 
 * {
   box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  font-family: "Poppins", sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, input,
+textarea, label, li, td, th {
+  font-family: "Poppins", sans-serif !important;
+}
+/* Keep icon glyph font unchanged */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
 }
 html {
   height: 100%;
