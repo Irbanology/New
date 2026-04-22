@@ -1802,6 +1802,12 @@ body.light .hero .bg-anim {
   text-align: center;
   margin-bottom: 16px;
 }
+.about-section .cta-band .section-title {
+  padding-top: 5%;
+}
+.about-section .cta-band .cta {
+  justify-content: center;
+}
 .about-section .section-title::after {
   left: 50%;
   transform: translateX(-50%);
@@ -2176,6 +2182,7 @@ textarea {
   align-items: center;
   gap: 8px;
   border: none;
+  text-decoration: none;
   cursor: pointer;
   font-weight: 700;
   padding: 12px 18px;
@@ -2430,6 +2437,21 @@ main#policy .grid.cols-6 {
 }
 @media (min-width: 880px) {
   main#policy .grid.cols-6 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FAQ page: keep content centered and full-width in middle */
+main#faq .container {
+  max-width: 980px;
+  margin-inline: auto;
+}
+main#faq .grid.cols-6 {
+  grid-template-columns: 1fr;
+  max-width: 100%;
+}
+@media (min-width: 880px) {
+  main#faq .grid.cols-6 {
     grid-template-columns: 1fr;
   }
 }
