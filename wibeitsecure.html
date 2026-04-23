@@ -470,7 +470,7 @@
             <div class="container">
                 <h2 class="section-title">Your conversations should stay private-not tracked, analyzed, or stored.</h2>
                 <div class="cta">
-                    <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.wibeit"
+                    <a class="btn primary" id="open-download-modal" 
                         target="_blank" rel="noopener noreferrer" data-ripple
                         aria-label="Download Wibeit secure messaging app">
                         Download Wibeit
@@ -481,8 +481,8 @@
     </main>
 
     <footer class="footer-dark" role="contentinfo">
-        <div class="footer-top container">
-            <div class="foot-brand">
+        <div class="footer-top container footer-columns">
+            <div class="foot-brand logo-section">
                 <a href="index.html" class="brand" aria-label="Go to home">
                     <div class="logo">
                         <img src="images/wibeIt_black.png" alt="WibeIt Private Messaging App logo" width="150"
@@ -541,6 +541,35 @@
             </div>
         </div>
     </footer>
+
+    <div id="download-modal-overlay" class="download-modal-overlay" aria-hidden="true">
+        <div class="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-modal-title">
+            <h3 id="download-modal-title">Download WibeIT</h3>
+            <p class="download-modal-subtitle">Choose your platform to get started</p>
+
+            <div class="download-modal-actions">
+                <a class="download-modal-btn google-play" href="https://play.google.com/store/apps/details?id=com.wibeit"
+                    target="_blank" rel="noopener noreferrer" aria-label="Download WibeIT on Google Play">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googleplay.svg" alt="" aria-hidden="true" />
+                    <span>Google Play</span>
+                </a>
+                <a class="download-modal-btn app-store" href="https://apps.apple.com/pk/app/wibeit/id6752349315"
+                    target="_blank" rel="noopener noreferrer" aria-label="Download WibeIT on the App Store">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apple.svg" alt="" aria-hidden="true" />
+                    <span>App Store</span>
+                </a>
+                <a class="download-modal-btn app-gallery" href="https://appgallery.huawei.com/app/C115158819"
+                    target="_blank" rel="noopener noreferrer" aria-label="Download WibeIT on AppGallery">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/huawei.svg" alt="" aria-hidden="true" />
+                    <span>AppGallery</span>
+                </a>
+            </div>
+
+            <button id="download-modal-close" class="download-modal-close" type="button" aria-label="Close download modal">
+                Close
+            </button>
+        </div>
+    </div>
 
     <script src="js/script.js" defer></script>
 </body>

@@ -390,6 +390,42 @@ if (form) {
   });
 }
 
+// Download modal (index privacy CTA button)
+const downloadModalTrigger = $('#open-download-modal');
+const downloadModalOverlay = $('#download-modal-overlay');
+const downloadModalClose = $('#download-modal-close');
+
+if (downloadModalTrigger && downloadModalOverlay && downloadModalClose) {
+  function openDownloadModal() {
+    downloadModalOverlay.classList.add('open');
+    downloadModalOverlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeDownloadModal() {
+    downloadModalOverlay.classList.remove('open');
+    downloadModalOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  downloadModalTrigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    openDownloadModal();
+  });
+
+  downloadModalClose.addEventListener('click', closeDownloadModal);
+
+  downloadModalOverlay.addEventListener('click', function (e) {
+    if (e.target === downloadModalOverlay) {
+      closeDownloadModal();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && downloadModalOverlay.classList.contains('open')) {
+      closeDownloadModal();
+    }
+  });
+}
+
 
 document.addEventListener("contextmenu", function(e) {
   e.preventDefault()
