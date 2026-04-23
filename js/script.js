@@ -392,6 +392,7 @@ if (form) {
 
 // Download modal (index privacy CTA button)
 const downloadModalTrigger = $('#open-download-modal');
+const downloadModalTriggers = $$('#open-download-modal');
 const downloadModalOverlay = $('#download-modal-overlay');
 const downloadModalClose = $('#download-modal-close');
 
@@ -406,9 +407,11 @@ if (downloadModalTrigger && downloadModalOverlay && downloadModalClose) {
     downloadModalOverlay.setAttribute('aria-hidden', 'true');
   }
 
-  downloadModalTrigger.addEventListener('click', function (e) {
-    e.preventDefault();
-    openDownloadModal();
+  downloadModalTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      openDownloadModal();
+    });
   });
 
   downloadModalClose.addEventListener('click', closeDownloadModal);
