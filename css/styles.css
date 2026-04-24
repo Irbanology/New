@@ -1173,7 +1173,7 @@ body.light .hero {
   content: "";
   position: absolute;
   width: clamp(8px, 1.5vw, 10px);
-  height: clamp(8px, 1.5vw, 10px);
+  /* height: clamp(8px, 1.5vw, 10px); */
   bottom: clamp(6px, 1.2vw, 8px);
   transform: rotate(45deg);
 }
@@ -1193,6 +1193,7 @@ body.light .hero {
 .chat-top,
 .chat-bottom {
   background: #f1f3f6;
+  /* background: black; */
   color: #111;
   border-bottom-left-radius: 6px;
 }
@@ -1569,66 +1570,100 @@ h1 {
   flex-wrap: wrap;
 }
 
-.store-btn {
-  display: inline-flex;
+.store-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 8px;
-  padding: 10px;
-  border-radius: 999px;
+  gap: 14px;
+}
+
+.store-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 170px;
+  height: 58px;
+  padding: 0 18px;
+  border-radius: 50px;
+  box-sizing: border-box;
   text-decoration: none;
+  flex-shrink: 0;
   color: var(--on-primary);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 200;
   background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 14px var(--accent-glow);
-  min-width: 140px;
+}
+
+@media (max-width: 768px) {
+
+  .hero,
+  .hero-text,
+  .hero-left,
+  .hero h1,
+  .hero p {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    word-break: break-word !important;
+    text-align: left !important;
+  }
+
+  .store-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .store-btn {
+    width: 220px !important;
+    height: 56px !important;
+    justify-content: flex-start !important;
+    padding: 0 20px !important;
+  }
 }
 
 .store-btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 28px var(--accent-glow);
-  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
 }
 
 .store-btn:active {
-  transform: translateY(-1px) scale(1);
+  transform: scale(1);
 }
 
-/* Store logos from Simple Icons (CDN) — make white on gradient buttons */
-.store-btn .store-logo {
-  width: 28px;
-  height: 28px;
+.store-icon {
+  width: 26px;
+  height: 26px;
   object-fit: contain;
   flex-shrink: 0;
-  display: block;
   filter: brightness(0) invert(1);
 }
 
-.store-btn .text {
+.store-btn-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   line-height: 1.2;
-  text-align: left;
-  white-space: nowrap;
-  min-width: 0;
 }
 
-.store-btn .text small {
-  font-size: 0.7rem;
-  font-weight: 500;
-  opacity: 0.95;
-  letter-spacing: 0.02em;
+.store-btn-top {
+  font-size: 11px;
+  font-weight: 400;
+  color: white;
+  opacity: 0.85;
 }
 
-.store-btn .text strong {
-  font-size: 1rem;
+.store-btn-name {
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  color: white;
 }
 
 .download-modal-overlay {
