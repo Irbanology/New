@@ -60,8 +60,6 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- LCP: preload only hero image so it gets full priority -->
-  <link rel="preload" href="images/Splash.png" as="image" />
   <!-- Optional: serve hero/app images as WebP or AVIF with PNG fallback for smaller file size -->
 
   <!-- Structured Data: Organization -->
@@ -282,7 +280,7 @@
                 <div class="notch"></div>
                 <div class="screen">
                   <img src="images/app_preveiw/1.png" alt="WibeIt private messaging app splash screen on phone" width="340"
-                    height="700" fetchpriority="high" decoding="async" />
+                    height="700" loading="eager" fetchpriority="high" decoding="async" />
                 </div>
               </div>
               <div class="chat-bubble chat-top">Hey, are we still on?</div>
@@ -749,17 +747,20 @@
         <div class="download-modal-actions">
           <a class="download-modal-btn google-play" href="https://play.google.com/store/apps/details?id=com.wibeit"
             target="_blank" rel="noopener noreferrer" aria-label="Download WibeIT on Google Play">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googleplay.svg" alt="" aria-hidden="true" />
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googleplay.svg" alt="" aria-hidden="true" width="20"
+              height="20" loading="lazy" decoding="async" />
             <span>Google Play</span>
           </a>
           <a class="download-modal-btn app-store" href="https://apps.apple.com/pk/app/wibeit/id6752349315" target="_blank"
             rel="noopener noreferrer" aria-label="Download WibeIT on the App Store">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apple.svg" alt="" aria-hidden="true" />
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apple.svg" alt="" aria-hidden="true" width="20"
+              height="20" loading="lazy" decoding="async" />
             <span>App Store</span>
           </a>
           <a class="download-modal-btn app-gallery" href="https://appgallery.huawei.com/app/C115158819" target="_blank"
             rel="noopener noreferrer" aria-label="Download WibeIT on AppGallery">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/huawei.svg" alt="" aria-hidden="true" />
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/huawei.svg" alt="" aria-hidden="true" width="20"
+              height="20" loading="lazy" decoding="async" />
             <span>AppGallery</span>
           </a>
         </div>

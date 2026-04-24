@@ -162,11 +162,15 @@ body {
   text-decoration: none;
   border-radius: 12px;
   z-index: 100;
-  transition: top 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 .skip-link:focus {
   top: 12px;
+  opacity: 1;
+  transform: translateY(0);
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
 }
@@ -1737,7 +1741,7 @@ h1 {
   padding: 0 18px;
   font-weight: 700;
   font-size: 1rem;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
 .download-modal-btn img {
@@ -1796,10 +1800,12 @@ h1 {
   color: var(--text);
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
+  opacity: 0.9;
 }
 
 .download-modal-close:hover {
+  opacity: 1;
   color: #333;
   /* text-decoration: underline; */
 }
@@ -2229,10 +2235,12 @@ body.light .hero .bg-anim {
   top: 0;
   left: 0;
   width: 4px;
-  height: 0;
+  height: 100%;
   border-radius: 0 4px 4px 0;
   background: linear-gradient(180deg, var(--grad-a), var(--grad-b));
-  transition: height 0.3s ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
@@ -2242,7 +2250,7 @@ body.light .hero .bg-anim {
 }
 
 .card:hover::before {
-  height: 100%;
+  transform: scaleY(1);
 }
 
 .icn {
@@ -2505,6 +2513,7 @@ body.light .hero .bg-anim {
 .faq {
   width: 100%;
   max-width: 640px;
+  min-height: 260px;
 }
 
 .faq-card+.faq-card {
@@ -2582,7 +2591,7 @@ body.light .hero .bg-anim {
 .faq-card .faq-content {
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .faq-card[open] .faq-content {
@@ -2657,6 +2666,10 @@ body.light .hero .bg-anim {
   display: grid;
   gap: 14px;
   max-width: 780px;
+}
+
+#form-status {
+  min-height: 1.5em;
 }
 
 .form.big input,

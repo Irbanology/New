@@ -391,12 +391,11 @@ if (form) {
 }
 
 // Download modal (index privacy CTA button)
-const downloadModalTrigger = $('#open-download-modal');
 const downloadModalTriggers = $$('#open-download-modal');
 const downloadModalOverlay = $('#download-modal-overlay');
 const downloadModalClose = $('#download-modal-close');
 
-if (downloadModalTrigger && downloadModalOverlay && downloadModalClose) {
+if (downloadModalTriggers.length && downloadModalOverlay && downloadModalClose) {
   function openDownloadModal() {
     downloadModalOverlay.classList.add('open');
     downloadModalOverlay.setAttribute('aria-hidden', 'false');
@@ -428,8 +427,3 @@ if (downloadModalTrigger && downloadModalOverlay && downloadModalClose) {
     }
   });
 }
-
-
-document.addEventListener("contextmenu", function(e) {
-  e.preventDefault()
-}, false )
