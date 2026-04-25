@@ -1218,7 +1218,7 @@ body.light .hero {
 }
 
 .chat-bottom {
-  bottom: 16%;
+  bottom: 25%;
   left: clamp(-85px, -22vw, -72px);
   animation: bubbleFloatEdge 5s ease-in-out infinite 1s;
 }
@@ -1769,7 +1769,16 @@ h1 {
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
   filter: brightness(1.1);
 }
-
+.download-modal-btn.app-store:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+  filter: brightness(1.1);
+}
+.download-modal-btn.app-gallery:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+  filter: brightness(1.1);
+}
 .download-modal-btn.app-store,
 .download-modal-btn.google-play,
 .download-modal-btn.app-gallery {
@@ -1912,6 +1921,31 @@ body.light .hero .bg-anim {
 }
 
 /* App preview — fixed phone-like frame, arrows outside */
+#showcase {
+  position: relative;
+  isolation: isolate;
+}
+
+#showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../images/app_preveiw/BG-00\ 2b\ lur_.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  /* filter: blur(1px); */
+  /* transform: scale(1.03); */
+  pointer-events: none;
+  z-index: 0;
+}
+
+#showcase>.container {
+  position: relative;
+  z-index: 1;
+}
+
 #showcase-heading {
   margin-bottom: 5%;
 }
@@ -2867,7 +2901,7 @@ textarea {
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  padding: var(--grid-gap) 0 32px;
+  padding: var(--grid-gap) var(--container-padding) 32px;
 }
 
 @media (min-width: 768px) {
@@ -2969,6 +3003,35 @@ textarea {
   width: 24px;
   height: 24px;
   display: block;
+}
+
+@media (max-width: 520px) {
+  .footer-bottom {
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  .foot-bottom-left,
+  .foot-bottom-right {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .foot-bottom-right {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .foot-email {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .foot-email a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
 /* Reveal animation */

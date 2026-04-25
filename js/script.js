@@ -207,7 +207,8 @@ if (faqCards.length && !prefersReducedMotion) {
       content.style.removeProperty('opacity');
     }
     function onTransitionEnd(ev) {
-      if (ev.target !== content || (ev.propertyName !== 'height' && ev.propertyName !== 'opacity')) return;
+      // Wait for height transition to finish; opacity ends earlier by design.
+      if (ev.target !== content || ev.propertyName !== 'height') return;
       content.removeEventListener('transitionend', onTransitionEnd);
       animating = false;
       clearContentStyles();
