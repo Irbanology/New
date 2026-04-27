@@ -356,38 +356,76 @@ window.addEventListener('load', () => {
   });
 });
 
-// ===== Form validation (only on pages with contact form) =====
-const form = $('#contact-form');
+// ===== Contact form submit behavior (direct email handoff) =====
+const form = document.querySelector('#contact-form');
 const status = $('#form-status');
 
 if (form) {
-  function setErr(input, msg) {
-    const field = input.closest('.field');
-    if (!field) return;
-    const err = field.querySelector('.err');
-    if (err) err.textContent = msg || '';
-    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-  }
-  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
-    const name = $('#name');
-    const email = $('#email');
-    const msg = $('#msg');
-    let ok = true;
 
-    if (name && name.value.trim().length < 2){ setErr(name, 'Please enter your full name.'); ok=false; } else if (name) setErr(name,'');
-    if (email && !validEmail(email.value)){ setErr(email, 'Please enter a valid email.'); ok=false; } else if (email) setErr(email,'');
-    if (msg && msg.value.trim().length < 10){ setErr(msg, 'Please tell us a bit more.'); ok=false; } else if (msg) setErr(msg,'');
+    const nameInput = form.querySelector('#name');
+    const emailInput = form.querySelector('#email');
+    const messageInput = form.querySelector('#msg');
 
-    if (!ok){ if (status) status.textContent = 'Fix the highlighted fields.'; return; }
-    if (status) status.textContent = 'Sending…';
+    const name = (nameInput?.value || '').trim();
+    const email = (emailInput?.value || '').trim();
+    const message = (messageInput?.value || '').trim();
 
-    setTimeout(() => {
-      if (status) status.textContent = 'Thanks! Your message has been sent.';
-      form.reset();
-    }, 800);
+    const clearInlineError = function (fieldEl) {
+      const errEl = fieldEl?.closest('.field')?.querySelector('.err');
+      if (errEl) errEl.textContent = '';
+    };
+    const setInlineError = function (fieldEl, msg) {
+      const errEl = fieldEl?.closest('.field')?.querySelector('.err');
+      if (errEl) errEl.textContent = msg;
+    };
+
+    clearInlineError(nameInput);
+    clearInlineError(emailInput);
+    clearInlineError(messageInput);
+    if (status) status.textContent = '';
+
+    let hasError = false;
+    if (!name) {
+      setInlineError(nameInput, 'Please enter your name.');
+      hasError = true;
+    }
+    if (!email) {
+      setInlineError(emailInput, 'Please enter your email.');
+      hasError = true;
+    }
+    if (!message) {
+      setInlineError(messageInput, 'Please enter your message.');
+      hasError = true;
+    }
+
+    if (hasError) {
+      if (status) status.textContent = 'Please fill in all fields before sending.';
+      return;
+    }
+
+    const subject = encodeURIComponent('WibeIt Support Query from ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n\n' +
+      'Message:\n' + message + '\n\n' +
+      '---\n' +
+      'Sent from: ' + window.location.href
+    );
+
+    if (status) {
+      status.textContent = 'Opening your email app to send directly to support@wibeit.co...';
+    }
+
+    const mailtoUrl = 'mailto:support@wibeit.co?subject=' + subject + '&body=' + body;
+    window.location.href = mailtoUrl;
+
+    setTimeout(function () {
+      if (status) {
+        status.textContent = 'If your email app did not open, please email support@wibeit.co manually.';
+      }
+    }, 1200);
   });
 }
 
