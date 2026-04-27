@@ -2,6 +2,49 @@
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
+// Keep locale pages linked inside their locale folder.
+(function localizeInternalPageLinks() {
+  const path = window.location.pathname || "/";
+  let base = "/";
+  if (path.includes("/in/")) base = "/in/";
+  else if (path.includes("/ae/")) base = "/ae/";
+
+  const existingPages = new Set(["index.html", "wibeitsecure.html"]);
+
+  $$("a").forEach((link) => {
+    const rawHref = link.getAttribute("href");
+    if (!rawHref) return;
+
+    // Leave absolute URLs, hash links, and non-HTTP schemes untouched.
+    if (
+      rawHref.startsWith("#") ||
+      rawHref.startsWith("//") ||
+      /^(https?:|mailto:|tel:|javascript:|data:)/i.test(rawHref)
+    ) {
+      return;
+    }
+
+    const parts = rawHref.match(/^([^?#]*)([?#].*)?$/);
+    if (!parts) return;
+    const pathPart = parts[1] || "";
+    const suffix = parts[2] || "";
+
+    // Only rewrite HTML page links; leave assets/files unchanged.
+    if (!pathPart.toLowerCase().endsWith(".html")) return;
+
+    const normalized = pathPart
+      .replace(/^\/+/, "")
+      .replace(/^(\.\.\/|\.\/)+/, "");
+    if (!normalized) return;
+
+    const nextHref = existingPages.has(normalized)
+      ? base + normalized
+      : "/" + normalized;
+
+    link.setAttribute("href", nextHref + suffix);
+  });
+})();
+
 // Footer year
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -356,7 +399,7 @@ window.addEventListener('load', () => {
   });
 });
 
-// ===== Contact form submit behavior (direct email handoff) =====
+// ===== Contact form submit behavior (direct email delivery) =====
 const form = document.querySelector('#contact-form');
 const status = $('#form-status');
 
@@ -405,27 +448,37 @@ if (form) {
       return;
     }
 
-    const subject = encodeURIComponent('WibeIt Support Query from ' + name);
-    const body = encodeURIComponent(
-      'Name: ' + name + '\n' +
-      'Email: ' + email + '\n\n' +
-      'Message:\n' + message + '\n\n' +
-      '---\n' +
-      'Sent from: ' + window.location.href
-    );
+    if (status) status.textContent = 'Sending your message...';
 
-    if (status) {
-      status.textContent = 'Opening your email app to send directly to support@wibeit.co...';
-    }
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
 
-    const mailtoUrl = 'mailto:support@wibeit.co?subject=' + subject + '&body=' + body;
-    window.location.href = mailtoUrl;
-
-    setTimeout(function () {
-      if (status) {
-        status.textContent = 'If your email app did not open, please email support@wibeit.co manually.';
-      }
-    }, 1200);
+    fetch('/send-mail.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({ name, email, message })
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error('Mail endpoint returned non-200 response.');
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.success === true) {
+          if (status) status.textContent = 'Thank you! Your query has been sent to support@wibeit.co.';
+          form.reset();
+          return;
+        }
+        throw new Error((data && data.error) || 'Mail send failed.');
+      })
+      .catch(() => {
+        if (status) status.textContent = 'Could not send message right now. Please try again.';
+      })
+      .finally(() => {
+        if (submitButton) submitButton.disabled = false;
+      });
   });
 }
 
