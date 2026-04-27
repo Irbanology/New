@@ -2,49 +2,6 @@
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-// Keep locale pages linked inside their locale folder.
-(function localizeInternalPageLinks() {
-  const path = window.location.pathname || "/";
-  let base = "/";
-  if (path.includes("/in/")) base = "/in/";
-  else if (path.includes("/ae/")) base = "/ae/";
-
-  const existingPages = new Set(["index.html", "wibeitsecure.html"]);
-
-  $$("a").forEach((link) => {
-    const rawHref = link.getAttribute("href");
-    if (!rawHref) return;
-
-    // Leave absolute URLs, hash links, and non-HTTP schemes untouched.
-    if (
-      rawHref.startsWith("#") ||
-      rawHref.startsWith("//") ||
-      /^(https?:|mailto:|tel:|javascript:|data:)/i.test(rawHref)
-    ) {
-      return;
-    }
-
-    const parts = rawHref.match(/^([^?#]*)([?#].*)?$/);
-    if (!parts) return;
-    const pathPart = parts[1] || "";
-    const suffix = parts[2] || "";
-
-    // Only rewrite HTML page links; leave assets/files unchanged.
-    if (!pathPart.toLowerCase().endsWith(".html")) return;
-
-    const normalized = pathPart
-      .replace(/^\/+/, "")
-      .replace(/^(\.\.\/|\.\/)+/, "");
-    if (!normalized) return;
-
-    const nextHref = existingPages.has(normalized)
-      ? base + normalized
-      : "/" + normalized;
-
-    link.setAttribute("href", nextHref + suffix);
-  });
-})();
-
 // Footer year
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
