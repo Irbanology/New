@@ -261,13 +261,16 @@ if (faqCards.length && !prefersReducedMotion) {
 
 // Typing effect for hero title (skipped when user prefers reduced motion)
 const typingEl = $('#typing');
-const phrase = 'Secure Messaging App Built for Private Communication';
 if (typingEl) {
+  const phrase = (typingEl.textContent || '').replace(/\s+/g, ' ').trim();
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
+  if (!phrase) {
+    // Nothing to animate if the page has no hero phrase.
+  } else if (prefersReducedMotion) {
     typingEl.textContent = phrase;
   } else {
     let ti = 0;
+    typingEl.textContent = '';
     (function typeLoop() {
       ti = ti + 1;
       typingEl.textContent = phrase.slice(0, ti);
