@@ -6,6 +6,20 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// Footer sitemap link: inject on all pages
+$$('.foot-col').forEach((col) => {
+  const title = (col.querySelector('.foot-col-title')?.textContent || '').trim().toLowerCase();
+  if (title !== 'explore') return;
+  const exists = [...col.querySelectorAll('a')].some(
+    (a) => (a.getAttribute('href') || '').includes('sitemaps.html')
+  );
+  if (exists) return;
+  const link = document.createElement('a');
+  link.href = '/sitemaps.html';
+  link.textContent = 'Sitemap';
+  col.appendChild(link);
+});
+
 // Navbar: active section on scroll (section.offsetTop - 120)
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav a");
@@ -53,74 +67,73 @@ function updateAppbarScroll() {
 window.addEventListener("scroll", updateAppbarScroll, { passive: true });
 updateAppbarScroll();
 
-// Mobile nav toggle + close on link click or outside click
-const hamb = $(".hamburger");
-const nav = $(".nav");
-const navOverlay = document.getElementById("nav-overlay");
-if (hamb && nav) {
-  function getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
-  }
-  function openMenu() {
-    nav.classList.add("open");
-    hamb.classList.add("open");
-    hamb.setAttribute("aria-expanded", "true");
-    nav.removeAttribute("aria-hidden");
-    if (appbar) appbar.classList.add("drawer-open");
-    if (navOverlay) {
-      navOverlay.classList.add("active");
-      navOverlay.setAttribute("aria-hidden", "false");
-    }
-    const scrollbarWidth = getScrollbarWidth();
-    document.body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) document.body.style.paddingRight = scrollbarWidth + "px";
-  }
-  function closeMenu() {
-    nav.classList.remove("open");
-    hamb.classList.remove("open");
-    hamb.setAttribute("aria-expanded", "false");
-    nav.setAttribute("aria-hidden", "true");
-    if (appbar) appbar.classList.remove("drawer-open");
-    if (navOverlay) {
-      navOverlay.classList.remove("active");
-      navOverlay.setAttribute("aria-hidden", "true");
-    }
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-  }
-  hamb.addEventListener("click", () => {
-    const isOpen = nav.classList.contains("open");
-    if (isOpen) closeMenu();
-    else openMenu();
-  });
-  if (navOverlay) {
-    navOverlay.addEventListener("click", closeMenu);
-  }
-  navLinks.forEach((a) => {
-    a.addEventListener("click", closeMenu);
-  });
-  document.addEventListener("click", (e) => {
-    if (nav.classList.contains("open") && !nav.contains(e.target) && !hamb.contains(e.target) && e.target !== navOverlay) {
-      closeMenu();
-    }
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && nav.classList.contains("open")) closeMenu();
-  });
-  function setNavAriaHidden() {
-    const isMobile = window.matchMedia("(max-width: 880px)").matches;
-    if (isMobile && !nav.classList.contains("open")) {
-      nav.setAttribute("aria-hidden", "true");
-    } else {
-      nav.removeAttribute("aria-hidden");
-    }
-    if (!isMobile && nav.classList.contains("open")) {
-      closeMenu();
-    }
-  }
-  setNavAriaHidden();
-  window.addEventListener("resize", setNavAriaHidden);
+// Mobile drawer (max-width: 768px): created from scratch via JS for all pages
+const desktopBrandLogo = $(".brand .logo img");
+const desktopHamburger = $(".hamburger");
+const legacyOverlay = $("#nav-overlay");
+if (legacyOverlay) legacyOverlay.remove();
+$$(".mobile-menu, .nav-drawer").forEach((legacyMenu) => legacyMenu.remove());
+
+if (desktopHamburger) {
+  desktopHamburger.classList.add("mob-hamburger");
+  desktopHamburger.id = "mobHamburger";
+  desktopHamburger.setAttribute("aria-controls", "mobDrawer");
+  desktopHamburger.setAttribute("aria-expanded", "false");
 }
+
+if (!$("#mobOverlay")) {
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-header">
+    <a href="./index.html" class="mob-logo">
+      <img src="${desktopBrandLogo ? desktopBrandLogo.getAttribute("src") : "../images/wibeIt_black.png"}" alt="Wibeit Logo">
+    </a>
+    <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="mob-nav-links">
+    <a href="./index.html#features">Features</a>
+    <a href="./index.html#showcase">Showcase</a>
+    <a href="./wibeitsecure.html">Wibeit Secure</a>
+    <a href="./about.html">About</a>
+    <a href="./contactus.html">Contact</a>
+  </nav>
+</div>`
+  );
+}
+
+const mobHamburger = document.getElementById("mobHamburger");
+const mobDrawer = document.getElementById("mobDrawer");
+const mobOverlay = document.getElementById("mobOverlay");
+const mobCloseBtn = document.getElementById("mobCloseBtn");
+
+function openMobMenu() {
+  if (!mobDrawer || !mobOverlay) return;
+  mobDrawer.classList.add("active");
+  mobOverlay.classList.add("active");
+  if (mobHamburger) mobHamburger.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMobMenu() {
+  if (!mobDrawer || !mobOverlay) return;
+  mobDrawer.classList.remove("active");
+  mobOverlay.classList.remove("active");
+  if (mobHamburger) mobHamburger.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+}
+
+if (mobHamburger) mobHamburger.addEventListener("click", openMobMenu);
+if (mobCloseBtn) mobCloseBtn.addEventListener("click", closeMobMenu);
+if (mobOverlay) mobOverlay.addEventListener("click", closeMobMenu);
+document.querySelectorAll(".mob-nav-links a").forEach((link) => {
+  link.addEventListener("click", closeMobMenu);
+});
+
+window.addEventListener("resize", () => {
+  if (!window.matchMedia("(max-width: 768px)").matches) closeMobMenu();
+});
 
 // Defer non-critical work until after first paint (helps LCP / TBT)
 function whenIdle(cb) {
@@ -342,8 +355,7 @@ $$('.nav a').forEach(a => {
       if (window.location.hash !== hash) {
         history.pushState(null, '', hash);
       }
-      if (nav) nav.classList.remove('open');
-      if (hamb) hamb.classList.remove('open');
+      closeMobMenu();
     }
   });
 });

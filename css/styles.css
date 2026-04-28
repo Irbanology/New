@@ -166,7 +166,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(124, 77, 255, 0.12);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -180,7 +180,7 @@ body {
 }
 
 ::-webkit-scrollbar-corner {
-  background: rgba(124, 77, 255, 0.12);
+  background: transparent;
 }
 
 /* Skip link for accessibility */
@@ -573,270 +573,140 @@ body {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
 }
 
-.hamburger {
-  display: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid var(--outline);
-  background: color-mix(in oklab, var(--surface), white 4%);
-  position: relative;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+/* Hide ALL mobile elements on desktop */
+.mob-drawer,
+.mob-overlay,
+.mob-hamburger,
+.mobile-menu,
+.nav-drawer,
+.drawer {
+  display: none !important;
 }
 
-.hamburger:hover {
-  background: color-mix(in oklab, var(--primary), transparent 92%);
-  border-color: color-mix(in oklab, var(--primary), transparent 60%);
-}
-
-.hamburger:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-.hamburger.open {
-  background: color-mix(in oklab, var(--primary), transparent 88%);
-  border-color: color-mix(in oklab, var(--primary), transparent 50%);
-}
-
-.hamburger span {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  height: 2.5px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
-}
-
-.hamburger span:nth-child(1) {
-  top: 13px;
-}
-
-.hamburger span:nth-child(2) {
-  top: 21px;
-}
-
-.hamburger span:nth-child(3) {
-  top: 29px;
-}
-
-.hamburger.open span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.hamburger.open span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Mobile: full-screen overlay behind drawer — dim + blur (glassmorphism); blocks background */
-.nav-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 9998;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  pointer-events: none;
-}
-
-.nav-overlay.active {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-@media (min-width: 881px) {
-  .nav-overlay {
-    display: none;
+@media (max-width: 768px) {
+  /* Only show hamburger on mobile */
+  .mob-hamburger {
+    display: flex !important;
   }
-}
 
-/* Mobile: full-screen drawer below navbar — solid white, above overlay, no blur */
-@media (max-width: 880px) {
+  .mob-drawer {
+    display: flex !important;
+  }
+
+  /* Hide desktop navbar on mobile */
+  .desktop-nav,
+  .nav-links,
+  .navbar-links,
   .nav {
-    position: fixed;
-    top: var(--appbar-height);
-    left: 0;
-    right: 0;
-    bottom: auto;
-    width: 100%;
-    height: calc(100% - var(--appbar-height));
-    padding: 16px 0 max(24px, env(safe-area-inset-bottom, 0px)) 0;
-    padding-left: env(safe-area-inset-left, 0px);
-    padding-right: env(safe-area-inset-right, 0px);
-    box-sizing: border-box;
+    display: none !important;
+  }
+
+  /* Hamburger button */
+  .mob-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
     border: none;
-    box-shadow: none;
-    z-index: 9999;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 10001;
+  }
+
+  .mob-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #1a1a1a;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* Dark overlay */
+  .mob-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mob-overlay.active {
+    display: block;
     opacity: 1;
+  }
+
+  /* Drawer */
+  .mob-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 9999;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    align-items: stretch;
-    transform: translateX(100%);
-    visibility: hidden;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s ease;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    gap: 0;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+    overflow-y: auto;
   }
 
-  .nav.open {
-    transform: translateX(0);
-    visibility: visible;
-    opacity: 1;
+  .mob-drawer.active {
+    right: 0;
   }
 
-  .nav a {
-    min-height: 48px;
-    padding: 14px 20px;
-    margin: 0 12px;
-    border-radius: 14px;
-    font-size: 1rem;
+  /* Drawer header */
+  .mob-drawer-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 36px;
+  }
+
+  .mob-logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  /* Close button */
+  .mob-close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
     color: #1a1a1a;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
   }
 
-  .nav a::before {
-    display: none;
-  }
-
-  .nav.open a {
-    opacity: 1;
-    transform: translateX(0);
-    color: #1a1a1a;
-  }
-
-  .nav.open a:nth-child(1) {
-    transition-delay: 0.05s;
-  }
-
-  .nav.open a:nth-child(2) {
-    transition-delay: 0.1s;
-  }
-
-  .nav.open a:nth-child(3) {
-    transition-delay: 0.15s;
-  }
-
-  .nav.open a:nth-child(4) {
-    transition-delay: 0.2s;
-  }
-
-  .nav.open a:nth-child(5) {
-    transition-delay: 0.25s;
-  }
-
-  .nav.open a:nth-child(6) {
-    transition-delay: 0.3s;
-  }
-
-  .nav a:hover {
-    transform: none;
-    background: transparent;
-    color: #1a1a1a;
-  }
-
-  .nav.open a:hover {
-    transform: none;
-    opacity: 1;
-  }
-
-  .nav a.active {
-    background: transparent;
-    color: var(--primary);
-    opacity: 1;
-  }
-
-  .nav a.active::after {
-    left: 20px;
-    transform: none;
-  }
-
-  /* Override global .nav a { opacity: 0.9 } so drawer links are full contrast */
-  .nav.open a,
-  .nav.open a:hover,
-  .nav.open a.active {
-    opacity: 1;
-  }
-
-  .hamburger {
+  /* Nav links */
+  .mob-nav-links {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav {
-    padding: 12px 0 max(20px, env(safe-area-inset-bottom, 0px)) 0;
+    flex-direction: column;
   }
 
-  .nav a {
-    min-height: 48px;
-    padding: 14px 16px;
-    margin: 0 10px;
-    font-size: 0.98rem;
+  .mob-nav-links a {
+    display: block;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s ease;
   }
 
-  .nav a.active::after {
-    left: 16px;
-  }
-}
-
-@media (max-width: 360px) {
-  .nav {
-    padding: 10px 0 max(16px, env(safe-area-inset-bottom, 0px)) 0;
-  }
-
-  .nav a {
-    padding: 12px 14px;
-    margin: 0 8px;
-    font-size: 0.95rem;
-  }
-
-  .nav a.active::after {
-    left: 14px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .appbar,
-  .appbar.scrolled,
-  .nav a,
-  .nav a::before,
-  .nav a.active::after,
-  .logo img,
-  .hamburger,
-  .hamburger span,
-  .nav-overlay,
-  .nav.open a {
-    transition-duration: 0.01ms !important;
-  }
-
-  .nav.open a:nth-child(1),
-  .nav.open a:nth-child(2),
-  .nav.open a:nth-child(3),
-  .nav.open a:nth-child(4),
-  .nav.open a:nth-child(5),
-  .nav.open a:nth-child(6) {
-    transition-delay: 0s;
+  .mob-nav-links a:hover {
+    color: #6366f1;
   }
 }
 
@@ -967,6 +837,20 @@ body {
   background: none !important;
 }
 
+/* Use-cases heading should keep brand blue + bottom accent line */
+
+#use-cases-heading::after {
+  content: "" !important;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -4px;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--grad-a), var(--grad-b)) !important;
+}
+
 .section-desc {
   color: var(--muted);
   margin: 0 auto 32px;
@@ -1093,11 +977,20 @@ body.light .hero {
   width: 100%;
 }
 
+/* Optional wider hero paragraph variant for landing pages */
+.hero .lead.hero-lead-wide {
+  max-width: 50ch;
+}
+
 @media (min-width: 960px) {
   .hero .lead {
     text-align: left;
     margin-left: 0;
     max-width: 38ch;
+  }
+
+  .hero .lead.hero-lead-wide {
+    max-width: 46ch;
   }
 }
 
@@ -2258,7 +2151,7 @@ body.light .hero .bg-anim {
 }
 
 #use-cases .card {
-  text-align: center;
+  text-align: justify;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2423,6 +2316,36 @@ body.light .hero .bg-anim {
 
 .about-block .about-list li:last-child {
   margin-bottom: 0;
+}
+
+/* Decision section list alignment helper (used in whatsapp alternative pages) */
+.decision-left .about-container {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.decision-left .section-title,
+.decision-left .section-desc {
+  text-align: left;
+}
+
+.decision-left .section-title::after {
+  left: 0;
+  transform: none;
+  /* text-align: left; */
+}
+
+.decision-left .about-block-text,
+.decision-left .about-list {
+  max-width: 56ch;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+/* Utility for explicit left-aligned intro copy in landing pages */
+.intro-left-text {
+  text-align: left;
 }
 
 @media (min-width: 768px) {
@@ -2906,6 +2829,23 @@ textarea {
 
 @media (max-width: 768px) {
 
+  /* Fallback: enforce index-style footer layout on all pages */
+  footer .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+  }
+
+  footer .footer-top .foot-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    grid-column: 1 / -1;
+  }
+
   /* Logo full width centered */
   footer .logo-section {
     display: flex;
@@ -3280,9 +3220,7 @@ main#policy a.policy-link:hover {
   .secure-hero::after,
   .secure-hero::before,
   .hero::after,
-  .hero::before,
-  section::after,
-  section::before {
+  .hero::before {
     display: none !important;
     content: none !important;
   }
