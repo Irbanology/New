@@ -2744,6 +2744,7 @@ body.light .hero .bg-anim {
 .form.big textarea {
   font-size: 1.04rem;
   padding: 14px;
+  border-radius: 14px;
 }
 
 .field {
