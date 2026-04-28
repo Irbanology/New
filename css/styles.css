@@ -1904,24 +1904,30 @@ body.light .hero .bg-anim {
   aspect-ratio: 9 / 19.5;
   /* match phone screenshot proportions */
   margin: 0 auto;
-  border-radius: 32px;
+  border-radius: 52px;
   overflow: hidden;
-  background: #000;
-  box-shadow: var(--shadow-3);
+  background: #111111;
+  box-shadow:
+    0 50px 100px rgba(0, 0, 0, 0.5),
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 8px #1a1a1a,
+    0 0 0 10px #2a2a2a,
+    0 0 40px rgba(139, 92, 246, 0.2);
 }
 
 #showcase .showcase-preview .slider {
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 30px;
+  border-radius: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 #showcase .showcase-preview .slider .slides {
-  border-radius: 30px;
+  border-radius: 44px;
   align-items: center;
 }
 
@@ -1938,13 +1944,28 @@ body.light .hero .bg-anim {
   object-fit: contain;
   /* full image visible, no crop */
   object-position: center center;
-  border-radius: 30px;
+  border-radius: 44px;
   background: #000;
   position: absolute;
   inset: 0;
   opacity: 0;
   transform: scale(0.985);
   transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#showcase .showcase-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 52px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
 }
 
 #showcase .slides img.active {
@@ -3308,5 +3329,107 @@ section {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
+  }
+}
+
+/* ==========================================
+   Cross-browser mobile compatibility fixes
+   (Android Chrome / Samsung Internet / older WebKit)
+   ========================================== */
+html {
+  text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+/* Fallback before clamp() for older engines */
+.hero h1 {
+  font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .store-buttons {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .store-btn {
+    width: 240px !important;
+    max-width: 280px !important;
+    height: 58px !important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: start !important;
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important;
+    padding: 0 20px !important;
+    border-radius: 50px !important;
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -webkit-border-radius: 50px !important;
+    -moz-border-radius: 50px !important;
+  }
+
+  /* Samsung Internet flex-gap fallback */
+  .store-buttons > * + * {
+    margin-top: 12px;
+  }
+
+  .hero,
+  .hero-inner,
+  .hero-wrapper,
+  .hero-content {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+  }
+
+  .hero-text,
+  .hero-left {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  body {
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* aspect-ratio fallback for old mobile browsers */
+@supports not (aspect-ratio: 1 / 1) {
+  #showcase .showcase-preview {
+    width: 280px;
+    height: 606px;
   }
 }
