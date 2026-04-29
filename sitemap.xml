@@ -1,39 +1,274 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+  <!-- Homepage -->
   <url>
     <loc>https://wibeit.co/</loc>
-    <lastmod>2025-02-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Wibeit Secure -->
   <url>
-    <loc>https://wibeit.co/privacy_policy.html</loc>
-    <lastmod>2025-02-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wibeit.co/legal.html</loc>
-    <lastmod>2025-02-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wibeit.co/faqs.html</loc>
-    <lastmod>2025-02-20</lastmod>
+    <loc>https://wibeit.co/wibeitsecure.html</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- About Us -->
+  <url>
+    <loc>https://wibeit.co/about.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Us -->
+  <url>
+    <loc>https://wibeit.co/contactus.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQs -->
+  <url>
+    <loc>https://wibeit.co/faqs.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://wibeit.co/privacy_policy.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Child Safety & CSAE Policy -->
   <url>
     <loc>https://wibeit.co/child_safety.html</loc>
-    <lastmod>2025-02-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
+
+  <!-- Child Protection Policy (alternate page) -->
   <url>
     <loc>https://wibeit.co/child_policy.html</loc>
-    <lastmod>2025-02-20</lastmod>
-    <changefreq>yearly</changefreq>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://wibeit.co/legal.html</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+
+  <!-- Privacy Policy PDF -->
+  <url>
+    <loc>https://wibeit.co/docs/privacy_policy.pdf</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Child Safety PDF -->
+  <url>
+    <loc>https://wibeit.co/docs/child_safety.pdf</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Child Policy PDF -->
+  <url>
+    <loc>https://wibeit.co/docs/childpolicy.pdf</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- FAQs PDF -->
+  <url>
+    <loc>https://wibeit.co/docs/faqs.pdf</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ==================== /in SUBFOLDER (India) ==================== -->
+
+  <!-- India – Homepage -->
+  <url>
+    <loc>https://wibeit.co/in/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- India – Wibeit Secure -->
+  <url>
+    <loc>https://wibeit.co/in/wibeitsecure.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- India – About -->
+  <url>
+    <loc>https://wibeit.co/in/about.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- India – Contact -->
+  <url>
+    <loc>https://wibeit.co/in/contactus.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- India – FAQs -->
+  <url>
+    <loc>https://wibeit.co/in/faqs.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- India – Privacy Policy -->
+  <url>
+    <loc>https://wibeit.co/in/privacy_policy.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- India – Child Safety -->
+  <url>
+    <loc>https://wibeit.co/in/child_safety.html</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- India – Child Policy -->
+  <url>
+    <loc>https://wibeit.co/in/child_policy.html</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- India – Legal -->
+  <url>
+    <loc>https://wibeit.co/in/legal.html</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+  <loc>https://wibeit.co/in/whatsappalternative.html</loc>
+  <lastmod>2026-04-28</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+
+  <!-- ==================== /ae SUBFOLDER (UAE) ==================== -->
+
+  <!-- UAE – Homepage -->
+  <url>
+    <loc>https://wibeit.co/ae/</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- UAE – Wibeit Secure -->
+  <url>
+    <loc>https://wibeit.co/ae/wibeitsecure.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- UAE – About -->
+  <url>
+    <loc>https://wibeit.co/ae/about.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- UAE – Contact -->
+  <url>
+    <loc>https://wibeit.co/ae/contactus.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- UAE – FAQs -->
+  <url>
+    <loc>https://wibeit.co/ae/faqs.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- UAE – Privacy Policy -->
+  <url>
+    <loc>https://wibeit.co/ae/privacy_policy.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- UAE – Child Safety -->
+  <url>
+    <loc>https://wibeit.co/ae/child_safety.html</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- UAE – Child Policy -->
+  <url>
+    <loc>https://wibeit.co/ae/child_policy.html</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- UAE – Legal -->
+  <url>
+    <loc>https://wibeit.co/ae/legal.html</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+  <loc>https://wibeit.co/ae/whatsappalternative.html</loc>
+  <lastmod>2026-04-28</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+
 </urlset>
