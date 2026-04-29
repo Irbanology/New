@@ -1,4 +1,4 @@
-// ===== Utilities =====
+﻿// ===== Utilities =====
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
@@ -88,7 +88,7 @@ if (!$("#mobOverlay")) {
 <div class="mob-drawer" id="mobDrawer">
   <div class="mob-drawer-header">
     <a href="./index.html" class="mob-logo">
-      <img src="${desktopBrandLogo ? desktopBrandLogo.getAttribute("src") : "../images/wibeIt_black.png"}" alt="Wibeit Logo">
+      <img src="${desktopBrandLogo ? desktopBrandLogo.getAttribute("src") : "../images/wibeIt_black.webp"}" alt="Wibeit Logo">
     </a>
     <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">✕</button>
   </div>

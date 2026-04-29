@@ -233,8 +233,8 @@ summary:focus-visible {
   .btn,
   .hamburger,
   .slide-btn {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 34px;
+    min-width: 34px;
   }
 
   .nav a {
@@ -243,7 +243,8 @@ summary:focus-visible {
   }
 
   .store-btn {
-    padding: 12px 20px;
+    padding: 12px 50
+    px;
   }
 }
 
@@ -1857,7 +1858,7 @@ body.light .hero .bg-anim {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../images/app_preveiw/BG-00\ 2b\ lur_.svg");
+  background-image: url("../images/app_preveiw/BG-00.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
