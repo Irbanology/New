@@ -1975,6 +1975,10 @@ body.light .hero .bg-anim {
 }
 
 @media (max-width: 520px) {
+  #showcase .showcase-wrap > .slide-btn {
+    display: none;
+  }
+
   #showcase .showcase-wrap>.slide-btn.prev {
     left: 8px;
     right: auto;
