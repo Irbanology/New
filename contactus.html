@@ -8,7 +8,7 @@
   <meta name="description"
     content="Contact Wibeit for support, inquiries, or feedback. Get help with secure messaging, account issues, or questions. Fast and reliable support worldwide.">
   <meta name="robots" content="index, follow" />
-
+  
   <link rel="canonical" href="https://wibeit.co/contactus.html" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.webp" />
@@ -81,8 +81,7 @@
       <p class="section-desc">
         Ask anything and suggest improvements. We reply within one business day.
       </p>
-      <form class="form big" id="form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-        <input type="hidden" name="access_key" value="15acd6c5-7651-4186-be0f-066312d0f4ca" />
+      <form class="form big" id="form" novalidate>
         <div class="grid two-col">
           <div class="field">
             <label for="name">Name</label>
@@ -175,7 +174,7 @@
       e.preventDefault();
 
       const formData = new FormData(form);
-      formData.set("access_key", "15acd6c5-7651-4186-be0f-066312d0f4ca");
+      formData.append("access_key", "09872ee9-a596-46e3-8a59-430fe8729dbe");
 
       const originalText = submitBtn.textContent;
 
