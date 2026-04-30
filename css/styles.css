@@ -2526,6 +2526,19 @@ body.light .hero .bg-anim {
   box-shadow: 0 0 12px var(--accent-glow);
 }
 
+.showcase-swipe-hint {
+  display: none;
+  margin-top: 14px;
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .showcase-swipe-hint {
+    display: block;
+  }
+}
+
 /* FAQ */
 .faq {
   width: 100%;
