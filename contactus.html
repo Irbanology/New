@@ -8,7 +8,7 @@
   <meta name="description"
     content="Contact Wibeit for support, inquiries, or feedback. Get help with secure messaging, account issues, or questions. Fast and reliable support worldwide.">
   <meta name="robots" content="index, follow" />
-  
+
   <link rel="canonical" href="https://wibeit.co/contactus.html" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.webp" />
@@ -59,8 +59,8 @@
         <a href="index.html#features">Features</a>
         <a href="index.html#showcase">Showcase</a>
         <a href="wibeitsecure.html">Wibeit Secure</a>
-        <!-- <a href="#faqs">FAQs</a> -->
         <a href="about.html">About</a>
+        <a href="contactus.html">Contact</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
         <span></span><span></span><span></span>
@@ -81,7 +81,7 @@
       <p class="section-desc">
         Ask anything and suggest improvements. We reply within one business day.
       </p>
-      <form class="form big" id="form" novalidate>
+      <form class="form big" id="contact-form" novalidate>
         <div class="grid two-col">
           <div class="field">
             <label for="name">Name</label>
@@ -149,7 +149,8 @@
       </div>
       <div class="foot-bottom-right">
         <div class="foot-email">
-          <img src="images/mail.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async" />
+          <img src="images/mail.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy"
+            decoding="async" />
           <a href="mailto:support@wibeit.co">support@wibeit.co</a>
         </div>
         <div class="foot-social">
@@ -165,45 +166,6 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    const form = document.getElementById('form');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      formData.append("access_key", "09872ee9-a596-46e3-8a59-430fe8729dbe");
-
-      const originalText = submitBtn.textContent;
-
-      submitBtn.textContent = "Sending...";
-      submitBtn.disabled = true;
-
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          alert("Success! Your message has been sent.");
-          form.reset();
-        } else {
-          alert("Error: " + data.message);
-        }
-
-      } catch (error) {
-        alert("Something went wrong. Please try again.");
-      } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-  </script>
   <script src="js/script.js" defer></script>
 </body>
 
