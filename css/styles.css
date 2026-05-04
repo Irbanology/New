@@ -243,8 +243,7 @@ summary:focus-visible {
   }
 
   .store-btn {
-    padding: 12px 50
-    px;
+    padding: 12px 50 px;
   }
 }
 
@@ -585,6 +584,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   /* Only show hamburger on mobile */
   .mob-hamburger {
     display: flex !important;
@@ -1531,14 +1531,22 @@ h1 {
 
 @media (max-width: 768px) {
 
+  /* Clip overflow at section/wrapper — not on h1/p (overflow ≠ visible makes a
+     scroll container; WebKit often treats clipped gradient text as horizontally scrollable). */
   .hero,
+  .hero-copy,
   .hero-text,
-  .hero-left,
+  .hero-left {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    text-align: left !important;
+  }
+
   .hero h1,
   .hero p {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: hidden !important;
     word-break: break-word !important;
     text-align: left !important;
   }
@@ -1697,16 +1705,19 @@ h1 {
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
   filter: brightness(1.1);
 }
+
 .download-modal-btn.app-store:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
   filter: brightness(1.1);
 }
+
 .download-modal-btn.app-gallery:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
   filter: brightness(1.1);
 }
+
 .download-modal-btn.app-store,
 .download-modal-btn.google-play,
 .download-modal-btn.app-gallery {
@@ -1959,12 +1970,10 @@ body.light .hero .bg-anim {
   position: absolute;
   inset: 0;
   border-radius: 52px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -1975,7 +1984,7 @@ body.light .hero .bg-anim {
 }
 
 @media (max-width: 520px) {
-  #showcase .showcase-wrap > .slide-btn {
+  #showcase .showcase-wrap>.slide-btn {
     display: none;
   }
 
@@ -3254,6 +3263,7 @@ main#policy a.policy-link:hover {
 }
 
 @media (max-width: 768px) {
+
   .wibeit-secure-hero::after,
   .wibeit-secure-hero::before,
   .secure-hero::after,
@@ -3265,13 +3275,10 @@ main#policy a.policy-link:hover {
   }
 }
 
-/* Compatibility and browser-fallback helpers */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #6366f1 transparent;
-}
+/* Compatibility and browser-fallback helpers
+   (avoid `* { scrollbar-* }` — on mobile it can render as a thin purple vertical “line” on the viewport edge) */
 
-.flex-container > * {
+.flex-container>* {
   margin: 8px;
 }
 
@@ -3302,14 +3309,21 @@ section {
 
 /* Responsive guardrails requested for cross-device compatibility */
 @media (max-width: 1440px) {}
+
 @media (max-width: 1280px) {}
+
 @media (max-width: 1024px) {}
+
 @media (max-width: 768px) {}
+
 @media (max-width: 480px) {}
+
 @media (max-width: 375px) {}
+
 @media (max-width: 320px) {}
 
 @media (max-width: 768px) {
+
   .cta-badge,
   .cta-pill,
   .experience-badge,
@@ -3324,6 +3338,7 @@ section {
 }
 
 @media (max-width: 768px) {
+
   .cta-button,
   .cta-btn,
   .start-btn,
@@ -3410,7 +3425,7 @@ img {
   }
 
   /* Samsung Internet flex-gap fallback */
-  .store-buttons > * + * {
+  .store-buttons>*+* {
     margin-top: 12px;
   }
 
@@ -3449,5 +3464,82 @@ img {
   #showcase .showcase-preview {
     width: 280px;
     height: 606px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Last-loaded global guard: kill horizontal scroll + purple vertical
+   rail (viewport scrollbar / subpixel overflow). Scoped so kicker dot,
+   section title underlines, button ripples, and card borders stay intact.
+   ------------------------------------------------------------------ */
+html,
+body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+h1,
+h2,
+h3,
+.hero,
+section {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.hero .hero-copy,
+.hero .hero-split,
+.hero .hero-right,
+.hero .hero-visual,
+.hero .hero-text,
+.hero .hero-left,
+.hero .lead {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+h1::before,
+h1::after,
+h2:not(.section-title):not(#use-cases-heading)::before,
+h2:not(.section-title):not(#use-cases-heading)::after,
+h3::before,
+h3::after,
+.hero *:not(.btn):not(.kicker):not(.fab)::before,
+.hero *:not(.btn):not(.kicker):not(.fab)::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    scrollbar-width: none !important;
+    scrollbar-color: transparent transparent !important;
+  }
+
+  * {
+    scrollbar-width: none !important;
+    scrollbar-color: transparent transparent !important;
+  }
+
+  *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent !important;
   }
 }
