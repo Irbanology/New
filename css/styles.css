@@ -1531,16 +1531,24 @@ h1 {
 
 @media (max-width: 768px) {
 
+  /* .hero h1: avoid overflow-x:hidden (forces scroll container with visible y). */
   .hero,
   .hero-text,
   .hero-left,
-  .hero h1,
   .hero p {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
     word-break: break-word !important;
     text-align: left !important;
+  }
+
+  .hero h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
+    text-align: left !important;
+    overflow: visible !important;
   }
 
   .store-buttons {
