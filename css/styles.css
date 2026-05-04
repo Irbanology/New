@@ -1531,22 +1531,14 @@ h1 {
 
 @media (max-width: 768px) {
 
-  /* Clip overflow at section/wrapper — not on h1/p (overflow ≠ visible makes a
-     scroll container; WebKit often treats clipped gradient text as horizontally scrollable). */
   .hero,
-  .hero-copy,
   .hero-text,
-  .hero-left {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    text-align: left !important;
-  }
-
+  .hero-left,
   .hero h1,
   .hero p {
     width: 100% !important;
     max-width: 100% !important;
+    overflow-x: hidden !important;
     word-break: break-word !important;
     text-align: left !important;
   }
