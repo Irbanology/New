@@ -189,111 +189,45 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
-// FAQ smooth open/close across devices.
+// FAQ performance-first accordion: class toggle + CSS grid animation.
 const faqCards = $$('.faq-card');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (faqCards.length && !prefersReducedMotion) {
-  const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
-  function getDurationMs() {
-    return window.matchMedia('(max-width: 768px)').matches ? 440 : 380;
-  }
-
+if (faqCards.length) {
   faqCards.forEach(function (details) {
     const summary = details.querySelector('summary');
     if (!summary) return;
-    details.classList.add('faq-smooth');
 
-    var content = details.querySelector('.faq-content');
-    if (!content) {
-      content = document.createElement('div');
-      content.className = 'faq-content';
-      content.setAttribute('role', 'region');
-      const nodesToWrap = Array.from(details.children).filter(function (el) {
-        return el !== summary;
+    let wrapper = details.querySelector('.faq-answer-wrapper');
+    let answer = details.querySelector('.faq-answer');
+
+    if (!wrapper || !answer) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'faq-answer-wrapper';
+      answer = document.createElement('div');
+      answer.className = 'faq-answer';
+      answer.setAttribute('role', 'region');
+
+      const nodesToWrap = Array.from(details.children).filter(function (node) {
+        return node !== summary;
       });
       if (!nodesToWrap.length) return;
-      nodesToWrap[0].parentNode.insertBefore(content, nodesToWrap[0]);
-      nodesToWrap.forEach(function (node) { content.appendChild(node); });
+      nodesToWrap[0].parentNode.insertBefore(wrapper, nodesToWrap[0]);
+      wrapper.appendChild(answer);
+      nodesToWrap.forEach(function (node) {
+        answer.appendChild(node);
+      });
     }
 
-    var animating = false;
-    var collapseAfterAnimation = false;
-
-    function clearContentStyles() {
-      content.style.removeProperty('height');
-      content.style.removeProperty('overflow');
-      content.style.removeProperty('transition');
-      content.style.removeProperty('opacity');
-      content.style.removeProperty('transform');
-      content.style.removeProperty('will-change');
-    }
-
-    function finishAnimation() {
-      animating = false;
-      if (collapseAfterAnimation) details.open = false;
-      clearContentStyles();
-      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-    }
+    const initiallyOpen = details.hasAttribute('open') || details.classList.contains('active');
+    details.open = true;
+    details.classList.toggle('active', initiallyOpen);
+    summary.setAttribute('aria-expanded', initiallyOpen ? 'true' : 'false');
 
     summary.addEventListener('click', function (e) {
       e.preventDefault();
-      if (animating) return;
-
-      const opening = !details.open;
-      const durationMs = getDurationMs();
-      const durationSec = (durationMs / 1000) + 's';
-      animating = true;
-      collapseAfterAnimation = !opening;
-      content.style.setProperty('will-change', 'height, opacity');
-
-      if (opening) {
-        details.open = true;
-        summary.setAttribute('aria-expanded', 'true');
-        const endHeight = content.scrollHeight;
-        content.style.setProperty('height', '0px');
-        content.style.setProperty('opacity', '0');
-        content.style.setProperty('transform', 'translateY(-8px)');
-        content.style.setProperty('overflow', 'hidden');
-        content.style.setProperty('transition', 'none');
-        content.offsetHeight;
-        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.78 / 1000) + 's ' + EASE + ', transform ' + (durationMs * 0.78 / 1000) + 's ' + EASE);
-        requestAnimationFrame(function () {
-          content.style.setProperty('height', endHeight + 'px');
-          content.style.setProperty('opacity', '1');
-          content.style.setProperty('transform', 'translateY(0)');
-        });
-      } else {
-        const startHeight = content.scrollHeight;
-        content.style.setProperty('height', startHeight + 'px');
-        content.style.setProperty('opacity', '1');
-        content.style.setProperty('transform', 'translateY(0)');
-        content.style.setProperty('overflow', 'hidden');
-        content.style.setProperty('transition', 'none');
-        content.offsetHeight;
-        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.5 / 1000) + 's ease-in, transform ' + (durationMs * 0.5 / 1000) + 's ease-in');
-        requestAnimationFrame(function () {
-          content.style.setProperty('height', '0px');
-          content.style.setProperty('opacity', '0');
-          content.style.setProperty('transform', 'translateY(-6px)');
-        });
-      }
-
-      function onTransitionEnd(ev) {
-        if (ev.target !== content || ev.propertyName !== 'height') return;
-        content.removeEventListener('transitionend', onTransitionEnd);
-        finishAnimation();
-      }
-      content.addEventListener('transitionend', onTransitionEnd);
-
-      // Fallback guard for interrupted transitions on some mobile browsers.
-      setTimeout(function () {
-        if (!animating) return;
-        content.removeEventListener('transitionend', onTransitionEnd);
-        finishAnimation();
-      }, durationMs + 180);
+      const willOpen = !details.classList.contains('active');
+      details.classList.toggle('active', willOpen);
+      summary.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     });
-
-    summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
   });
 }
 

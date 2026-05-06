@@ -2563,7 +2563,7 @@ body.light .hero .bg-anim {
   border-color: color-mix(in oklab, var(--primary), transparent 80%);
 }
 
-.faq-card[open] {
+.faq-card.active {
   border-color: color-mix(in oklab, var(--primary), transparent 65%);
   box-shadow: var(--shadow-2);
 }
@@ -2612,26 +2612,38 @@ body.light .hero .bg-anim {
 .faq-card summary .chev {
   margin-left: auto;
   flex-shrink: 0;
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--primary);
   -webkit-tap-highlight-color: transparent;
 }
 
-.faq-card[open] summary .chev {
+.faq-card.active summary .chev {
   transform: rotate(180deg);
 }
 
-.faq-card .faq-content {
+.faq-card .faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: grid-template-rows, opacity, transform;
+}
+
+.faq-card.active .faq-answer-wrapper {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-card .faq-answer {
   overflow: hidden;
-  max-height: 0;
-  transition: opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.faq-card[open] .faq-content {
-  max-height: 600px;
-}
-
-.faq-card .faq-content p {
+.faq-card .faq-answer p {
   color: var(--muted);
   margin: 0;
   padding: 0 20px 18px 20px;
@@ -2641,29 +2653,7 @@ body.light .hero .bg-anim {
   font-size: 0.98rem;
 }
 
-/* JS-driven smooth open: animate .faq-content height + opacity */
-.faq-card.faq-smooth .faq-content {
-  transition: none;
-  max-height: none;
-  will-change: height, opacity;
-  transform: translateY(0);
-}
-
-.faq-card.faq-smooth:not([open]) .faq-content {
-  max-height: 0;
-}
-
-.faq-card.faq-smooth[open] .faq-content {
-  max-height: none;
-}
-
-.faq-card.faq-smooth .faq-content p {
-  margin: 0;
-  padding: 0 20px 18px 20px;
-  padding-left: calc(20px + 1.25rem + 12px);
-}
-
-/* Fallback when no .faq-content (JS not run or legacy markup) */
+/* Fallback when JS is unavailable */
 .faq-card>p {
   color: var(--muted);
   margin: 0;
@@ -2675,6 +2665,17 @@ body.light .hero .bg-anim {
 
 .faq-card:not([open])>p {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-card .faq-answer-wrapper {
+    transition: none;
+    transform: none;
+  }
+
+  .faq-card summary .chev {
+    transition: none;
+  }
 }
 
 /* Contact — form alignment */
