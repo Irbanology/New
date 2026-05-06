@@ -189,82 +189,15 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
-// FAQ: clean, natural accordion animation with lightweight JS.
+// FAQ: instant open/close (no animations), keep ARIA in sync.
 const faqCards = $$('.faq-card');
-const faqReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (faqCards.length) {
   faqCards.forEach(function (details) {
     const summary = details.querySelector('summary');
     if (!summary) return;
-
-    let content = details.querySelector('.faq-content');
-    if (!content) {
-      content = document.createElement('div');
-      content.className = 'faq-content';
-      content.setAttribute('role', 'region');
-      const nodes = Array.from(details.children).filter(function (node) { return node !== summary; });
-      if (!nodes.length) return;
-      nodes[0].parentNode.insertBefore(content, nodes[0]);
-      nodes.forEach(function (node) { content.appendChild(node); });
-    }
-
     summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-    content.style.height = details.open ? 'auto' : '0px';
-    content.style.opacity = details.open ? '1' : '0';
-    content.style.transform = details.open ? 'translateY(0)' : 'translateY(-4px)';
-
-    if (faqReducedMotion) return;
-
-    let animating = false;
-    summary.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (animating) return;
-      animating = true;
-
-      const opening = !details.open;
-      const duration = window.matchMedia('(max-width: 768px)').matches ? 420 : 360;
-      const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
-      content.style.transition = 'height ' + (duration / 1000) + 's ' + ease + ', opacity ' + (duration * 0.72 / 1000) + 's ' + ease + ', transform ' + (duration * 0.72 / 1000) + 's ' + ease;
-      content.style.overflow = 'hidden';
-
-      if (opening) {
-        details.open = true;
-        summary.setAttribute('aria-expanded', 'true');
-        content.style.height = '0px';
-        content.style.opacity = '0';
-        content.style.transform = 'translateY(-4px)';
-        requestAnimationFrame(function () {
-          content.style.height = content.scrollHeight + 'px';
-          content.style.opacity = '1';
-          content.style.transform = 'translateY(0)';
-        });
-      } else {
-        summary.setAttribute('aria-expanded', 'false');
-        // Sync logical close state immediately to avoid "content hidden but question still open".
-        details.open = false;
-        content.style.height = content.scrollHeight + 'px';
-        content.style.opacity = '1';
-        content.style.transform = 'translateY(0)';
-        requestAnimationFrame(function () {
-          content.style.height = '0px';
-          content.style.opacity = '0';
-          content.style.transform = 'translateY(-4px)';
-        });
-      }
-
-      const finish = function () {
-        content.removeEventListener('transitionend', onEnd);
-        if (opening) {
-          content.style.height = 'auto';
-        }
-        animating = false;
-      };
-      const onEnd = function (ev) {
-        if (ev.target !== content || ev.propertyName !== 'height') return;
-        finish();
-      };
-      content.addEventListener('transitionend', onEnd);
-      setTimeout(finish, duration + 120);
+    details.addEventListener('toggle', function () {
+      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
     });
   });
 }
