@@ -189,94 +189,105 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
-// FAQ smooth open/close: wrap content in .faq-content, animate height + opacity, aria-expanded, no double-toggle
+// FAQ smooth open/close across devices.
 const faqCards = $$('.faq-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (faqCards.length && !prefersReducedMotion) {
-  const isPhoneViewport = window.matchMedia('(max-width: 768px)').matches;
-  const DURATION_MS = isPhoneViewport ? 320 : 420;
-  const EASE_OPEN = 'cubic-bezier(0.4, 0, 0.2, 1)';   // smooth ease-out
-  const EASE_CLOSE = 'cubic-bezier(0.4, 0, 0.2, 1)';  // same for consistent feel
-  const TRANSITION = 'height ' + (DURATION_MS / 1000) + 's ' + EASE_OPEN + ', opacity ' + (DURATION_MS * 0.6 / 1000) + 's ease-out';
+  const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+  function getDurationMs() {
+    return window.matchMedia('(max-width: 768px)').matches ? 260 : 360;
+  }
+
   faqCards.forEach(function (details) {
-    details.classList.add('faq-smooth');
     const summary = details.querySelector('summary');
-    let p = details.querySelector('p');
-    if (!summary || !p) return;
+    if (!summary) return;
+    details.classList.add('faq-smooth');
+
     var content = details.querySelector('.faq-content');
     if (!content) {
       content = document.createElement('div');
       content.className = 'faq-content';
       content.setAttribute('role', 'region');
-      p.parentNode.insertBefore(content, p);
-      content.appendChild(p);
+      const nodesToWrap = Array.from(details.children).filter(function (el) {
+        return el !== summary;
+      });
+      if (!nodesToWrap.length) return;
+      nodesToWrap[0].parentNode.insertBefore(content, nodesToWrap[0]);
+      nodesToWrap.forEach(function (node) { content.appendChild(node); });
     }
+
     var animating = false;
-    var wasClosing = false;
+    var collapseAfterAnimation = false;
+
     function clearContentStyles() {
       content.style.removeProperty('height');
       content.style.removeProperty('overflow');
       content.style.removeProperty('transition');
-      content.style.removeProperty('max-height');
       content.style.removeProperty('opacity');
+      content.style.removeProperty('will-change');
     }
-    function onTransitionEnd(ev) {
-      // Wait for height transition to finish; opacity ends earlier by design.
-      if (ev.target !== content || ev.propertyName !== 'height') return;
-      content.removeEventListener('transitionend', onTransitionEnd);
+
+    function finishAnimation() {
       animating = false;
+      if (collapseAfterAnimation) details.open = false;
       clearContentStyles();
-      if (wasClosing) details.open = false;
       summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-      if (details.open && isPhoneViewport) {
-        // Keep opened answer in view on small screens.
-        const rect = details.getBoundingClientRect();
-        const viewportPadding = 18;
-        if (rect.top < viewportPadding || rect.bottom > window.innerHeight - viewportPadding) {
-          details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }
     }
+
     summary.addEventListener('click', function (e) {
       e.preventDefault();
       if (animating) return;
-      var isOpening = !details.open;
+
+      const opening = !details.open;
+      const durationMs = getDurationMs();
+      const durationSec = (durationMs / 1000) + 's';
       animating = true;
-      wasClosing = !isOpening;
-      if (isOpening) {
+      collapseAfterAnimation = !opening;
+      content.style.setProperty('will-change', 'height, opacity');
+
+      if (opening) {
         details.open = true;
         summary.setAttribute('aria-expanded', 'true');
-        var endHeight = content.scrollHeight;
+        const endHeight = content.scrollHeight;
         content.style.setProperty('height', '0px');
         content.style.setProperty('opacity', '0');
         content.style.setProperty('overflow', 'hidden');
-        content.style.setProperty('max-height', 'none');
         content.style.setProperty('transition', 'none');
         content.offsetHeight;
-        content.style.setProperty('transition', TRANSITION);
-        content.style.setProperty('height', endHeight + 'px');
-        content.style.setProperty('opacity', '1');
+        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.72 / 1000) + 's ease-out');
+        requestAnimationFrame(function () {
+          content.style.setProperty('height', endHeight + 'px');
+          content.style.setProperty('opacity', '1');
+        });
       } else {
-        var startHeight = content.scrollHeight;
+        const startHeight = content.scrollHeight;
         content.style.setProperty('height', startHeight + 'px');
         content.style.setProperty('opacity', '1');
         content.style.setProperty('overflow', 'hidden');
-        content.style.setProperty('max-height', 'none');
-        content.style.setProperty('transition', 'height ' + (DURATION_MS / 1000) + 's ' + EASE_CLOSE + ', opacity ' + (DURATION_MS * 0.4 / 1000) + 's ease-in');
+        content.style.setProperty('transition', 'none');
         content.offsetHeight;
-        content.style.setProperty('height', '0px');
-        content.style.setProperty('opacity', '0');
+        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.5 / 1000) + 's ease-in');
+        requestAnimationFrame(function () {
+          content.style.setProperty('height', '0px');
+          content.style.setProperty('opacity', '0');
+        });
+      }
+
+      function onTransitionEnd(ev) {
+        if (ev.target !== content || ev.propertyName !== 'height') return;
+        content.removeEventListener('transitionend', onTransitionEnd);
+        finishAnimation();
       }
       content.addEventListener('transitionend', onTransitionEnd);
+
+      // Fallback guard for interrupted transitions on some mobile browsers.
       setTimeout(function () {
-        if (animating) {
-          animating = false;
-          if (wasClosing) details.open = false;
-          clearContentStyles();
-          summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-        }
-      }, DURATION_MS + 100);
+        if (!animating) return;
+        content.removeEventListener('transitionend', onTransitionEnd);
+        finishAnimation();
+      }, durationMs + 140);
     });
+
     summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
   });
 }
