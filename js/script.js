@@ -240,6 +240,8 @@ if (faqCards.length) {
         });
       } else {
         summary.setAttribute('aria-expanded', 'false');
+        // Sync logical close state immediately to avoid "content hidden but question still open".
+        details.open = false;
         content.style.height = content.scrollHeight + 'px';
         content.style.opacity = '1';
         content.style.transform = 'translateY(0)';
@@ -254,8 +256,6 @@ if (faqCards.length) {
         content.removeEventListener('transitionend', onEnd);
         if (opening) {
           content.style.height = 'auto';
-        } else {
-          details.open = false;
         }
         animating = false;
       };
