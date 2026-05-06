@@ -2563,7 +2563,7 @@ body.light .hero .bg-anim {
   border-color: color-mix(in oklab, var(--primary), transparent 80%);
 }
 
-.faq-card.active {
+.faq-card[open] {
   border-color: color-mix(in oklab, var(--primary), transparent 65%);
   box-shadow: var(--shadow-2);
 }
@@ -2617,33 +2617,28 @@ body.light .hero .bg-anim {
   -webkit-tap-highlight-color: transparent;
 }
 
-.faq-card.active summary .chev {
+.faq-card[open] summary .chev {
   transform: rotate(180deg);
 }
 
-.faq-card .faq-answer-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
+.faq-card .faq-content {
+  overflow: hidden;
+  height: 0;
   opacity: 0;
   transform: translateY(-4px);
   transition:
-    grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: grid-template-rows, opacity, transform;
+  will-change: height, opacity, transform;
 }
 
-.faq-card.active .faq-answer-wrapper {
-  grid-template-rows: 1fr;
+.faq-card[open] .faq-content {
   opacity: 1;
   transform: translateY(0);
 }
 
-.faq-card .faq-answer {
-  overflow: hidden;
-}
-
-.faq-card .faq-answer p {
+.faq-card .faq-content p {
   color: var(--muted);
   margin: 0;
   padding: 0 20px 18px 20px;
@@ -2668,9 +2663,10 @@ body.light .hero .bg-anim {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .faq-card .faq-answer-wrapper {
+  .faq-card .faq-content {
     transition: none;
     transform: none;
+    will-change: auto;
   }
 
   .faq-card summary .chev {
