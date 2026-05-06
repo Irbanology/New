@@ -189,15 +189,84 @@ whenIdle(function () {
   $$('.reveal').forEach(function (el) { revealObserver.observe(el); });
 });
 
-// FAQ: instant open/close (no animations), keep ARIA in sync.
+// FAQ: animated on desktop, instant on mobile/tablet.
 const faqCards = $$('.faq-card');
 if (faqCards.length) {
+  const desktopQuery = window.matchMedia('(min-width: 1025px)');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
   faqCards.forEach(function (details) {
     const summary = details.querySelector('summary');
     if (!summary) return;
+
+    let content = details.querySelector('.faq-content');
+    if (!content) {
+      content = document.createElement('div');
+      content.className = 'faq-content';
+      content.setAttribute('role', 'region');
+      const nodes = Array.from(details.children).filter(function (node) { return node !== summary; });
+      if (!nodes.length) return;
+      nodes[0].parentNode.insertBefore(content, nodes[0]);
+      nodes.forEach(function (node) { content.appendChild(node); });
+    }
+
     summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+
     details.addEventListener('toggle', function () {
       summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    });
+
+    let animating = false;
+    summary.addEventListener('click', function (e) {
+      if (!desktopQuery.matches || reducedMotionQuery.matches) return;
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+
+      const opening = !details.open;
+      const durationMs = 400;
+      const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+      content.style.transition = 'height ' + (durationMs / 1000) + 's ' + easing + ', opacity 0.34s ' + easing + ', transform 0.34s ' + easing;
+      content.style.overflow = 'hidden';
+
+      if (opening) {
+        details.open = true;
+        summary.setAttribute('aria-expanded', 'true');
+        content.style.height = '0px';
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(-4px)';
+        requestAnimationFrame(function () {
+          content.style.height = content.scrollHeight + 'px';
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0)';
+        });
+      } else {
+        summary.setAttribute('aria-expanded', 'false');
+        content.style.height = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+        requestAnimationFrame(function () {
+          content.style.height = '0px';
+          content.style.opacity = '0';
+          content.style.transform = 'translateY(-4px)';
+        });
+      }
+
+      const finish = function () {
+        content.removeEventListener('transitionend', onEnd);
+        if (opening) {
+          content.style.height = 'auto';
+        } else {
+          details.open = false;
+        }
+        animating = false;
+      };
+      const onEnd = function (ev) {
+        if (ev.target !== content || ev.propertyName !== 'height') return;
+        finish();
+      };
+      content.addEventListener('transitionend', onEnd);
+      setTimeout(finish, durationMs + 120);
     });
   });
 }
