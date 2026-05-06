@@ -2669,6 +2669,43 @@ body.light .hero .bg-anim {
   display: none;
 }
 
+@media (max-width: 768px) {
+  .faq {
+    max-width: 100%;
+    min-height: 0;
+  }
+
+  .faq-card {
+    overflow: hidden;
+    border-radius: 16px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .faq-card summary {
+    padding: 16px;
+    line-height: 1.35;
+    touch-action: manipulation;
+  }
+
+  .faq-card summary .chev {
+    transition-duration: 0.3s;
+  }
+
+  .faq-card .faq-content {
+    will-change: height, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .faq-card .faq-content p,
+  .faq-card.faq-smooth .faq-content p,
+  .faq-card>p {
+    padding: 0 16px 16px 16px;
+    padding-left: calc(16px + 1.25rem + 10px);
+    line-height: 1.65;
+  }
+}
+
 /* Contact — form alignment */
 #contact .container {
   display: flex;

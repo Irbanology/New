@@ -193,7 +193,8 @@ whenIdle(function () {
 const faqCards = $$('.faq-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (faqCards.length && !prefersReducedMotion) {
-  const DURATION_MS = 420;
+  const isPhoneViewport = window.matchMedia('(max-width: 768px)').matches;
+  const DURATION_MS = isPhoneViewport ? 320 : 420;
   const EASE_OPEN = 'cubic-bezier(0.4, 0, 0.2, 1)';   // smooth ease-out
   const EASE_CLOSE = 'cubic-bezier(0.4, 0, 0.2, 1)';  // same for consistent feel
   const TRANSITION = 'height ' + (DURATION_MS / 1000) + 's ' + EASE_OPEN + ', opacity ' + (DURATION_MS * 0.6 / 1000) + 's ease-out';
@@ -227,6 +228,14 @@ if (faqCards.length && !prefersReducedMotion) {
       clearContentStyles();
       if (wasClosing) details.open = false;
       summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      if (details.open && isPhoneViewport) {
+        // Keep opened answer in view on small screens.
+        const rect = details.getBoundingClientRect();
+        const viewportPadding = 18;
+        if (rect.top < viewportPadding || rect.bottom > window.innerHeight - viewportPadding) {
+          details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
     }
     summary.addEventListener('click', function (e) {
       e.preventDefault();
