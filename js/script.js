@@ -193,9 +193,9 @@ whenIdle(function () {
 const faqCards = $$('.faq-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (faqCards.length && !prefersReducedMotion) {
-  const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+  const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
   function getDurationMs() {
-    return window.matchMedia('(max-width: 768px)').matches ? 260 : 360;
+    return window.matchMedia('(max-width: 768px)').matches ? 440 : 380;
   }
 
   faqCards.forEach(function (details) {
@@ -224,6 +224,7 @@ if (faqCards.length && !prefersReducedMotion) {
       content.style.removeProperty('overflow');
       content.style.removeProperty('transition');
       content.style.removeProperty('opacity');
+      content.style.removeProperty('transform');
       content.style.removeProperty('will-change');
     }
 
@@ -251,25 +252,29 @@ if (faqCards.length && !prefersReducedMotion) {
         const endHeight = content.scrollHeight;
         content.style.setProperty('height', '0px');
         content.style.setProperty('opacity', '0');
+        content.style.setProperty('transform', 'translateY(-8px)');
         content.style.setProperty('overflow', 'hidden');
         content.style.setProperty('transition', 'none');
         content.offsetHeight;
-        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.72 / 1000) + 's ease-out');
+        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.78 / 1000) + 's ' + EASE + ', transform ' + (durationMs * 0.78 / 1000) + 's ' + EASE);
         requestAnimationFrame(function () {
           content.style.setProperty('height', endHeight + 'px');
           content.style.setProperty('opacity', '1');
+          content.style.setProperty('transform', 'translateY(0)');
         });
       } else {
         const startHeight = content.scrollHeight;
         content.style.setProperty('height', startHeight + 'px');
         content.style.setProperty('opacity', '1');
+        content.style.setProperty('transform', 'translateY(0)');
         content.style.setProperty('overflow', 'hidden');
         content.style.setProperty('transition', 'none');
         content.offsetHeight;
-        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.5 / 1000) + 's ease-in');
+        content.style.setProperty('transition', 'height ' + durationSec + ' ' + EASE + ', opacity ' + (durationMs * 0.5 / 1000) + 's ease-in, transform ' + (durationMs * 0.5 / 1000) + 's ease-in');
         requestAnimationFrame(function () {
           content.style.setProperty('height', '0px');
           content.style.setProperty('opacity', '0');
+          content.style.setProperty('transform', 'translateY(-6px)');
         });
       }
 
@@ -285,7 +290,7 @@ if (faqCards.length && !prefersReducedMotion) {
         if (!animating) return;
         content.removeEventListener('transitionend', onTransitionEnd);
         finishAnimation();
-      }, durationMs + 140);
+      }, durationMs + 180);
     });
 
     summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
