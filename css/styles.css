@@ -63,18 +63,6 @@ button {
 }
 
 @media (min-width: 1024px) {
-  @media (max-width: 880px) {
-    :root {
-      --appbar-height: 59px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    :root {
-      --appbar-height: 55px;
-    }
-  }
-
   :root {
     --container-padding: 32px;
     --section-padding-y: 96px;
@@ -1869,7 +1857,7 @@ body.light .hero .bg-anim {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../images/app_preveiw/BG-00.webp");
+  background-image: url("../images/app_preview/BG-00.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
