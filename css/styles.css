@@ -270,7 +270,7 @@ body {
   }
 
   #main-content {
-    padding-top: var(--appbar-height);
+    padding-top: 0;
   }
 }
 
@@ -283,7 +283,7 @@ body {
   }
 
   #main-content {
-    padding-top: var(--appbar-height);
+    padding-top: 0;
   }
 }
 
