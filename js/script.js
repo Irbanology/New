@@ -214,6 +214,12 @@ if (faqCards.length) {
 
     details.addEventListener('toggle', function () {
       summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      if (!details.open) return;
+      faqCards.forEach(function (other) {
+        if (other !== details && other.open) {
+          other.open = false;
+        }
+      });
     });
 
     let animating = false;
