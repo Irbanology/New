@@ -270,7 +270,7 @@ body {
   }
 
   #main-content {
-    padding-top: 0;
+    padding-top: var(--appbar-height);
   }
 }
 
@@ -283,7 +283,7 @@ body {
   }
 
   #main-content {
-    padding-top: 0;
+    padding-top: var(--appbar-height);
   }
 }
 
@@ -1893,18 +1893,19 @@ body.light .hero .bg-anim {
   align-items: center;
   justify-content: center;
   gap: 16px;
+  padding-inline: clamp(16px, 4vw, 48px);
   padding-bottom: 52px;
   /* space for dots */
 }
 
 #showcase .showcase-wrap>.slide-btn.prev {
-  left: calc(50% - 140px - 48px - 12px);
-  /* 12px left of phone (280px / 2 = 140px) */
+  left: calc(50% - 140px - 48px - 24px);
+  /* keep a comfortable 24px gap from phone */
   right: auto;
 }
 
 #showcase .showcase-wrap>.slide-btn.next {
-  right: calc(50% - 140px - 48px - 12px);
+  right: calc(50% - 140px - 48px - 24px);
   left: auto;
 }
 

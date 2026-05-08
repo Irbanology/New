@@ -33,6 +33,7 @@ const samePageHashLinks = [...navLinks].filter((a) => {
 });
 
 function setActiveNav() {
+  if (!samePageHashLinks.length || !sections.length) return;
   let current = "";
   sections.forEach((section) => {
     const sectionTop = section.offsetTop - 120;
@@ -49,9 +50,11 @@ function setActiveNav() {
     }
   });
 }
-window.addEventListener("scroll", setActiveNav, { passive: true });
-window.addEventListener("load", setActiveNav);
-setActiveNav();
+if (samePageHashLinks.length && sections.length) {
+  window.addEventListener("scroll", setActiveNav, { passive: true });
+  window.addEventListener("load", setActiveNav);
+  setActiveNav();
+}
 
 // Navbar shadow on scroll
 const appbar = document.querySelector(".appbar");
@@ -147,13 +150,14 @@ function whenIdle(cb) {
 // Scroll progress & subtle parallax (passive + rAF) — deferred
 whenIdle(function () {
   const bar = document.querySelector('.progress span');
+  const floatEls = $$('.float');
   let scrollScheduled = false;
   function updateScrollProgress() {
     scrollScheduled = false;
     const max = document.documentElement.scrollHeight - innerHeight;
     const p = max <= 0 ? 0 : Math.min(1, (scrollY || window.pageYOffset) / max);
     if (bar) bar.style.transform = 'scaleX(' + p + ')';
-    $$('.float').forEach(function (el, i) {
+    floatEls.forEach(function (el, i) {
       el.style.transform = 'translateY(' + (p * 20) * (i % 2 ? 1 : -1) + 'px)';
     });
   }
@@ -327,7 +331,7 @@ if (slider && slides) {
 }
 
 // ===== Smooth scroll for nav (same-page hash links) =====
-$$('.nav a').forEach(a => {
+samePageHashLinks.forEach(a => {
   a.addEventListener('click', (e) => {
     const href = a.getAttribute('href') || '';
     const isHashLink = href.includes('#');
@@ -356,13 +360,31 @@ window.addEventListener('load', () => {
   });
 });
 
-// ===== Contact form submit behavior (direct email delivery) =====
+// ===== Contact form submit behavior =====
 const form = document.querySelector('#contact-form');
 const status = $('#form-status');
+const WEB3FORMS_CONFIG = {
+  accessKey: '15acd6c5-7651-4186-be0f-066312d0f4ca'
+};
+
+function applyWeb3FormsAccessKey(targetForm) {
+  const formAction = targetForm?.getAttribute('action') || '';
+  const isWeb3FormsTarget = formAction.includes('api.web3forms.com/submit');
+  if (!isWeb3FormsTarget) return;
+
+  const accessKeyInput = targetForm.querySelector('input[name="access_key"]');
+  if (accessKeyInput && !accessKeyInput.value) {
+    accessKeyInput.value = WEB3FORMS_CONFIG.accessKey;
+  }
+}
 
 if (form) {
+  applyWeb3FormsAccessKey(form);
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    const formAction = form.getAttribute('action') || '';
+    const isWeb3FormsTarget = formAction.includes('api.web3forms.com/submit');
 
     const nameInput = form.querySelector('#name');
     const emailInput = form.querySelector('#email');
@@ -410,28 +432,41 @@ if (form) {
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) submitButton.disabled = true;
 
-    fetch('/send-mail.php', {
+    const formData = isWeb3FormsTarget ? new FormData(form) : new FormData();
+    if (!isWeb3FormsTarget) {
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+    }
+
+    const endpoint = isWeb3FormsTarget ? formAction : '/send_mail.php';
+    const fetchOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({ name, email, message })
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error('Mail endpoint returned non-200 response.');
-        return response.json();
-      })
+      body: formData,
+      headers: isWeb3FormsTarget ? { Accept: 'application/json' } : {}
+    };
+
+    fetch(endpoint, fetchOptions)
+      .then((response) => response.json())
       .then((data) => {
-        if (data && data.success === true) {
-          if (status) status.textContent = 'Thank you! Your query has been sent to support@wibeit.co.';
+        const isSuccess = isWeb3FormsTarget
+          ? (data && data.success === true)
+          : (data && data.status === 'success');
+        if (isSuccess) {
+          if (status) {
+            status.textContent = 'Thank you! Your query has been sent.';
+            status.style.color = 'green';
+          }
           form.reset();
           return;
         }
-        throw new Error((data && data.error) || 'Mail send failed.');
+        throw new Error(data?.message || 'Mail send failed.');
       })
       .catch(() => {
-        if (status) status.textContent = 'Could not send message right now. Please try again.';
+        if (status) {
+          status.textContent = 'Could not send message right now. Please try again.';
+          status.style.color = 'red';
+        }
       })
       .finally(() => {
         if (submitButton) submitButton.disabled = false;

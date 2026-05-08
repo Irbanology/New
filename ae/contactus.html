@@ -80,9 +80,10 @@
     <div class="container">
       <h1 id="contact-heading" class="section-title">Contact Us</h1>
       <p class="section-desc">
-        Ask anything and suggest improvements. We reply within one business day.
+        Ask anything and suggest improvements.
       </p>
-      <form class="form big" id="contact-form" novalidate>
+      <form class="form big" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="15acd6c5-7651-4186-be0f-066312d0f4ca" />
         <div class="grid two-col">
           <div class="field">
             <label for="name">Name</label>
@@ -126,7 +127,6 @@
       </nav>
       <nav class="foot-col" aria-label="Explore">
         <h3 class="foot-col-title">Explore</h3>
-        <!-- <a href="/ae/index.html#home">Blog</a> -->
         <a href="/ae/faqs.html">FAQs</a>
         <a href="/ae/wibeitsecure.html">Wibeit Secure</a>
         <a href="/ae/whatsappalternative.html">Whatsapp alternative</a>
