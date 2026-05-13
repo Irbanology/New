@@ -1,4 +1,4 @@
-﻿// ===== Utilities =====
+// ===== Utilities =====
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
@@ -198,6 +198,14 @@ const faqCards = $$('.faq-card');
 if (faqCards.length) {
   const desktopQuery = window.matchMedia('(min-width: 1025px)');
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const FAQ_ANIM_MS = 400;
+  const FAQ_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+  function raf2(run) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(run);
+    });
+  }
 
   faqCards.forEach(function (details) {
     const summary = details.querySelector('summary');
@@ -234,39 +242,38 @@ if (faqCards.length) {
       animating = true;
 
       const opening = !details.open;
-      const durationMs = 400;
-      const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
-      content.style.transition = 'height ' + (durationMs / 1000) + 's ' + easing + ', opacity 0.34s ' + easing + ', transform 0.34s ' + easing;
+      const durationSec = FAQ_ANIM_MS / 1000;
+      content.style.transition = 'height ' + durationSec + 's ' + FAQ_EASING;
       content.style.overflow = 'hidden';
 
       if (opening) {
         details.open = true;
         summary.setAttribute('aria-expanded', 'true');
         content.style.height = '0px';
-        content.style.opacity = '0';
-        content.style.transform = 'translateY(-4px)';
-        requestAnimationFrame(function () {
+        raf2(function () {
           content.style.height = content.scrollHeight + 'px';
-          content.style.opacity = '1';
-          content.style.transform = 'translateY(0)';
         });
       } else {
         summary.setAttribute('aria-expanded', 'false');
-        content.style.height = content.scrollHeight + 'px';
-        content.style.opacity = '1';
-        content.style.transform = 'translateY(0)';
+        const closeStart = content.scrollHeight;
+        content.style.height = closeStart + 'px';
+        void content.offsetHeight;
         requestAnimationFrame(function () {
           content.style.height = '0px';
-          content.style.opacity = '0';
-          content.style.transform = 'translateY(-4px)';
         });
       }
 
+      let finished = false;
       const finish = function () {
+        if (finished) return;
+        finished = true;
         content.removeEventListener('transitionend', onEnd);
+        content.style.transition = '';
+        content.style.overflow = '';
         if (opening) {
           content.style.height = 'auto';
         } else {
+          content.style.height = '';
           details.open = false;
         }
         animating = false;
@@ -276,7 +283,7 @@ if (faqCards.length) {
         finish();
       };
       content.addEventListener('transitionend', onEnd);
-      setTimeout(finish, durationMs + 120);
+      setTimeout(finish, FAQ_ANIM_MS + 80);
     });
   });
 }
