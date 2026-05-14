@@ -292,7 +292,7 @@ if (slider && slides) {
     dots.innerHTML = '';
     imgs.forEach((_, i) => {
       const b = document.createElement('button');
-      b.className = 'dot' + (i===idx ? ' active' : '');
+      b.className = 'dot' + (i === idx ? ' active' : '');
       b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
       b.setAttribute('aria-current', i === idx ? 'true' : 'false');
       b.addEventListener('click', () => go(i));
@@ -310,20 +310,20 @@ if (slider && slides) {
       d.setAttribute('aria-current', di === idx ? 'true' : 'false');
     });
   }
-  function next(){ go(idx+1); }
-  function prev(){ go(idx-1); }
+  function next() { go(idx + 1); }
+  function prev() { go(idx - 1); }
 
   const nextBtn = $('.next');
   const prevBtn = $('.prev');
   if (nextBtn) nextBtn.onclick = next;
   if (prevBtn) prevBtn.onclick = prev;
-  slides.addEventListener('touchstart', (e)=> touchStartX = e.touches[0].clientX, {passive:true});
-  slides.addEventListener('touchend', (e)=>{
-    if (touchStartX===null) return;
+  slides.addEventListener('touchstart', (e) => touchStartX = e.touches[0].clientX, { passive: true });
+  slides.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 40) (dx<0? next: prev)();
+    if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
     touchStartX = null;
-  }, {passive:true});
+  }, { passive: true });
   renderDots();
   go(0);
 }
@@ -453,7 +453,7 @@ if (form) {
           : (data && data.status === 'success');
         if (isSuccess) {
           if (status) {
-            status.textContent = 'Thank you! Your query has been sent.';
+            status.textContent = 'Thanks! Request sent';
             status.style.color = 'green';
           }
           form.reset();
