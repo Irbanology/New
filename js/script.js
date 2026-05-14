@@ -6,27 +6,18 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Footer sitemap link: inject on all pages
-$$('.foot-col').forEach((col) => {
-  const title = (col.querySelector('.foot-col-title')?.textContent || '').trim().toLowerCase();
-  if (title !== 'explore') return;
-  const exists = [...col.querySelectorAll('a')].some(
-    (a) => (a.getAttribute('href') || '').includes('sitemaps.html')
-  );
-  if (exists) return;
-  const link = document.createElement('a');
-  link.href = '/sitemaps.html';
-  link.textContent = 'Sitemap';
-  col.appendChild(link);
-});
-
 // Navbar: active section on scroll (section.offsetTop - 120)
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav a");
 const samePageHashLinks = [...navLinks].filter((a) => {
   try {
-    const url = new URL(a.getAttribute("href") || "", window.location.href);
-    return url.pathname === window.location.pathname && url.hash;
+    const href = a.getAttribute("href") || "";
+    const url = new URL(href, window.location.href);
+    if (!url.hash) return false;
+    const cur = new URL(window.location.href);
+    return (
+      normalizeSitePathname(url.pathname) === normalizeSitePathname(cur.pathname)
+    );
   } catch {
     return false;
   }
@@ -446,7 +437,8 @@ if (form) {
       formData.append('message', message);
     }
 
-    const endpoint = isWeb3FormsTarget ? formAction : '/send_mail.php';
+
+    const endpoint = formAction;
     const fetchOptions = {
       method: 'POST',
       body: formData,
