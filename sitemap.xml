@@ -1,357 +1,312 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Global / default English pages -->
+  <!-- Global / Default English Pages                     -->
 
   <url>
     <loc>https://wibeit.co/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/index.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/wibeitsecure.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/wibeitsecure.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/wibeitsecure.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/about.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/about.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/contactus.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/contactus.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/contactus.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/faqs.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/faqs.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/faqs.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/privacy_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/privacy_policy.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/privacy_policy.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/child_safety.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/child_safety.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_safety.html"/>
   </url>
 
   <url>
-    <loc>https://wibeit.co/child_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_policy.html"/>
-  </url>
-
-  <url>
     <loc>https://wibeit.co/legal.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/legal.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/legal.html"/>
   </url>
 
-  <!-- India (/in/) -->
+  <!-- India (/in/) Localised Pages                       -->
 
   <url>
     <loc>https://wibeit.co/in/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/index.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/wibeitsecure.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/wibeitsecure.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/wibeitsecure.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/whatsappalternative.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/whatsappalternative.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/whatsappalternative.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/in/whatsappalternative.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/whatsappalternative.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/whatsappalternative.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/bussinesscommunication.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/bussinesscommunication.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/bussinesscommunication.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/in/bussinesscommunication.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/bussinesscommunication.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/bussinesscommunication.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/about.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/about.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/contactus.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/contactus.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/contactus.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/faqs.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/faqs.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/faqs.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/privacy_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/privacy_policy.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/privacy_policy.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/in/child_safety.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/child_safety.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_safety.html"/>
   </url>
 
   <url>
-    <loc>https://wibeit.co/in/child_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_policy.html"/>
-  </url>
-
-  <url>
     <loc>https://wibeit.co/in/legal.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/legal.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/legal.html"/>
   </url>
 
-  <!-- UAE (/ae/) -->
+  <!-- UAE (/ae/) Localised Pages                         -->
 
   <url>
     <loc>https://wibeit.co/ae/index.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/index.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/wibeitsecure.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/wibeitsecure.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/wibeitsecure.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/wibeitsecure.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/wibeitsecure.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/whatsappalternative.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/whatsappalternative.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/whatsappalternative.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/in/whatsappalternative.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/whatsappalternative.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/whatsappalternative.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/bussinesscommunication.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/bussinesscommunication.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/bussinesscommunication.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/in/bussinesscommunication.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/bussinesscommunication.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/bussinesscommunication.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/about.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/about.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/contactus.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/contactus.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/contactus.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/contactus.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/contactus.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/faqs.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/faqs.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/faqs.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/faqs.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/faqs.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/privacy_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-04-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/privacy_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/privacy_policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/privacy_policy.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/privacy_policy.html"/>
   </url>
 
   <url>
     <loc>https://wibeit.co/ae/child_safety.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_safety.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/child_safety.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/child_safety.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_safety.html"/>
   </url>
 
   <url>
-    <loc>https://wibeit.co/ae/child_policy.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/child_policy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/child_policy.html"/>
-  </url>
-
-  <url>
     <loc>https://wibeit.co/ae/legal.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://wibeit.co/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-in" href="https://wibeit.co/in/legal.html"/>
-    <xhtml:link rel="alternate" hreflang="en-ae" href="https://wibeit.co/ae/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://wibeit.co/in/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en-AE" href="https://wibeit.co/ae/legal.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wibeit.co/legal.html"/>
-  </url>
-
-  <!-- HTML sitemap (single locale) -->
-
-  <url>
-    <loc>https://wibeit.co/sitemaps.html</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 
 </urlset>
